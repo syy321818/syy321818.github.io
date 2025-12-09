@@ -78,6 +78,44 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-Fix-Error-13" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2025/12/09/Fix-Error-13/" class="article-date">
+  <time class="dt-published" datetime="2025-12-09T10:37:59.496Z" itemprop="datePublished">2025-12-09</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>Markdown</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">title: How to Fix Runtime Error 13 (Type Mismatch) in Excel VBA</span><br><span class="line">date: 2025-12-09 11:30:00</span><br><span class="line">tags: [VBA Error, Runtime Error 13, Debugging]</span><br><span class="line">categories: Troubleshooting</span><br><span class="line">description: Learn how to solve Runtime Error 13 (Type Mismatch) in Excel VBA. Common causes include mixing text with numbers or invalid date formats.</span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">## Introduction</span><br><span class="line">**Runtime Error 13: Type Mismatch** occurs when you try to feed a variable a value designed for a different data type. It’s like trying to fit a square peg into a round hole—for example, trying to store the text &quot;Hello&quot; inside a variable meant only for Numbers.</span><br><span class="line"></span><br><span class="line">## Common Causes</span><br><span class="line">1.  **Text vs Numbers:** Performing math on a cell that contains text (even a space).</span><br><span class="line">2.  **Invalid Dates:** Trying to assign a non-date string to a Date variable.</span><br><span class="line">3.  **Error Values:** Reading a cell that already contains an Excel error (like `#N/A`).</span><br><span class="line"></span><br><span class="line">## The Solution</span><br><span class="line"></span><br><span class="line">### Scenario 1: Math on Text</span><br><span class="line">If cell A1 contains &quot;Apple&quot; and you try to multiply it, VBA crashes.</span><br><span class="line"></span><br><span class="line">**❌ The Wrong Way:**</span><br><span class="line">```vba</span><br><span class="line">Dim Result As Integer</span><br><span class="line">&#x27; Crashes if A1 is text</span><br><span class="line">Result = Range(&quot;A1&quot;).Value * 2 </span><br></pre></td></tr></table></figure>
+
+<p><strong>✅ The Fix:</strong> Check if the value is numeric before doing math.</p>
+<p>VBA</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">Sub FixTypeMismatch()</span><br><span class="line">    Dim CellValue As Variant</span><br><span class="line">    CellValue = Range(&quot;A1&quot;).Value</span><br><span class="line">    </span><br><span class="line">    &#x27; Check if it is a number</span><br><span class="line">    If IsNumeric(CellValue) Then</span><br><span class="line">        MsgBox CellValue * 2</span><br><span class="line">    Else</span><br><span class="line">        MsgBox &quot;Error: Cell A1 is not a number.&quot;</span><br><span class="line">    End If</span><br><span class="line">End Sub</span><br></pre></td></tr></table></figure>
+
+<h3 id="Scenario-2-Handling-N-A-Errors"><a href="#Scenario-2-Handling-N-A-Errors" class="headerlink" title="Scenario 2: Handling #N&#x2F;A Errors"></a>Scenario 2: Handling #N&#x2F;A Errors</h3><p>If your VLOOKUP in Excel returns <code>#N/A</code>, VBA cannot read it into a standard String or Integer.</p>
+<p><strong>✅ The Fix:</strong> Use <code>IsError</code> to check the cell first.</p>
+<p>VBA</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Sub CheckForErrors()</span><br><span class="line">    If IsError(Range(&quot;A1&quot;).Value) Then</span><br><span class="line">        MsgBox &quot;Skipping cell because it contains an error.&quot;</span><br><span class="line">    Else</span><br><span class="line">        MsgBox &quot;The value is &quot; &amp; Range(&quot;A1&quot;).Value</span><br><span class="line">    End If</span><br><span class="line">End Sub</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2025/12/09/Fix-Error-13/" data-id="cuidBuuQgYN-DsMh1GHBgGqMH" data-title="" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-Fix-Error-9" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2025/12/09/Fix-Error-9/" class="article-date">
@@ -314,6 +352,10 @@
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2025/12/09/Fix-Error-13/">(no title)</a>
+          </li>
         
           <li>
             <a href="/2025/12/09/Fix-Error-9/">(no title)</a>
