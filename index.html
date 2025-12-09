@@ -117,10 +117,304 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2025/12/09/hello-world/" data-id="cuidpK3V6-4VrgRw3kS-tZh1u" data-title="Hello World" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2025/12/09/hello-world/" data-id="cuidM6VLRv3uFig9HBd_jCE5u" data-title="Hello World" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-Save-As-PDF" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2025/12/09/Save-As-PDF/" class="article-date">
+  <time class="dt-published" datetime="2025-12-09T05:30:00.000Z" itemprop="datePublished">2025-12-09</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Automation-Scripts/">Automation Scripts</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2025/12/09/Save-As-PDF/">VBA Script to Save Active Sheet as PDF</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="The-Script"><a href="#The-Script" class="headerlink" title="The Script"></a>The Script</h2><p>This macro saves the current sheet as a PDF in the same folder as the Excel file.</p>
+<pre><code class="language-vba">Sub SavePDF()
+    Dim PDFName As String
+    
+    If ThisWorkbook.Path = &quot;&quot; Then
+        MsgBox &quot;Save file first!&quot;
+        Exit Sub
+    End If
+    
+    PDFName = ThisWorkbook.Path &amp; &quot;\&quot; &amp; ActiveSheet.Name &amp; &quot;.pdf&quot;
+    
+    ActiveSheet.ExportAsFixedFormat Type:=xlTypePDF, Filename:=PDFName
+    
+    MsgBox &quot;PDF Saved: &quot; &amp; PDFName
+End Sub
+</code></pre>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2025/12/09/Save-As-PDF/" data-id="cuidY2W8_x7I4qHjHsa7Eh4PJ" data-title="VBA Script to Save Active Sheet as PDF" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Automation/" rel="tag">Automation</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PDF/" rel="tag">PDF</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-Merge-Files" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2025/12/09/Merge-Files/" class="article-date">
+  <time class="dt-published" datetime="2025-12-09T05:00:00.000Z" itemprop="datePublished">2025-12-09</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Automation-Scripts/">Automation Scripts</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2025/12/09/Merge-Files/">How to Merge Multiple Excel Files into One (VBA Script)</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="The-Script"><a href="#The-Script" class="headerlink" title="The Script"></a>The Script</h2><p>This script loops through a folder and combines all Excel files into your current workbook.</p>
+<pre><code class="language-vba">Sub MergeFiles()
+    Dim FolderPath As String, Filename As String
+    Dim Sheet As Worksheet, LastRow As Long
+    Dim Master As Workbook, Source As Workbook
+    
+    &#39; CHANGE THIS PATH (Keep the slash at the end)
+    FolderPath = &quot;C:\Users\YourName\Documents\Files\&quot;
+    
+    Set Master = ThisWorkbook
+    Filename = Dir(FolderPath &amp; &quot;*.xlsx&quot;)
+    
+    Do While Filename &lt;&gt; &quot;&quot;
+        Set Source = Workbooks.Open(FolderPath &amp; Filename)
+        LastRow = Source.Sheets(1).Cells(Rows.Count, 1).End(xlUp).Row
+        
+        If LastRow &gt; 1 Then
+            Source.Sheets(1).Range(&quot;A2:Z&quot; &amp; LastRow).Copy
+            Master.Sheets(1).Range(&quot;A&quot; &amp; Rows.Count).End(xlUp).Offset(1, 0).PasteSpecial xlPasteValues
+        End If
+        
+        Source.Close False
+        Filename = Dir
+    Loop
+    MsgBox &quot;Done!&quot;
+End Sub
+</code></pre>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2025/12/09/Merge-Files/" data-id="cuidUVDvHkbDjvR96o3Oo5QLc" data-title="How to Merge Multiple Excel Files into One (VBA Script)" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Automation/" rel="tag">Automation</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/VBA-Script/" rel="tag">VBA Script</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-Fix-Error-424" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2025/12/09/Fix-Error-424/" class="article-date">
+  <time class="dt-published" datetime="2025-12-09T04:00:00.000Z" itemprop="datePublished">2025-12-09</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Troubleshooting/">Troubleshooting</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2025/12/09/Fix-Error-424/">How to Fix Runtime Error 424 (Object Required)</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>Runtime Error 424 usually means you made a typo in an object name, or you forgot to use the <code>Set</code> keyword.</p>
+<h2 id="The-Solution"><a href="#The-Solution" class="headerlink" title="The Solution"></a>The Solution</h2><h3 id="Scenario-Missing-“Set”-Keyword"><a href="#Scenario-Missing-“Set”-Keyword" class="headerlink" title="Scenario: Missing “Set” Keyword"></a>Scenario: Missing “Set” Keyword</h3><p><strong>❌ The Wrong Way</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Dim wb As Workbook</span><br><span class="line">&#x27; Error 424: Object required</span><br><span class="line">wb = ActiveWorkbook</span><br></pre></td></tr></table></figure>
+
+<p><strong>✅ The Right Way</strong></p>
+<p>VBA</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#x27; Always use Set for objects</span><br><span class="line">Set wb = ActiveWorkbook</span><br></pre></td></tr></table></figure>
+
+<h3 id="Scenario-Typo-in-Object-Name"><a href="#Scenario-Typo-in-Object-Name" class="headerlink" title="Scenario: Typo in Object Name"></a>Scenario: Typo in Object Name</h3><p><strong>❌ The Wrong Way</strong></p>
+<p>VBA</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#x27; Error 424 if &quot;Button 1&quot; does not exist</span><br><span class="line">ActiveSheet.Shapes(&quot;Buton 1&quot;).Delete</span><br></pre></td></tr></table></figure>
+
+<p><strong>✅ The Right Way</strong></p>
+<p>VBA</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">On Error Resume Next</span><br><span class="line">&#x27; Correct the spelling</span><br><span class="line">ActiveSheet.Shapes(&quot;Button 1&quot;).Delete</span><br><span class="line">On Error GoTo 0</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2025/12/09/Fix-Error-424/" data-id="cuidM4Ac0FXtmuTVIxp1Og1_K" data-title="How to Fix Runtime Error 424 (Object Required)" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Runtime-Error-424/" rel="tag">Runtime Error 424</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/VBA-Error/" rel="tag">VBA Error</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-Fix-Error-13" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2025/12/09/Fix-Error-13/" class="article-date">
+  <time class="dt-published" datetime="2025-12-09T03:30:00.000Z" itemprop="datePublished">2025-12-09</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Troubleshooting/">Troubleshooting</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2025/12/09/Fix-Error-13/">How to Fix Runtime Error 13 (Type Mismatch)</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>“Runtime Error 13: Type Mismatch” happens when you try to put the wrong type of data into a variable. For example, trying to multiply a text string like “Apple” by a number.</p>
+<h2 id="The-Solution"><a href="#The-Solution" class="headerlink" title="The Solution"></a>The Solution</h2><h3 id="Scenario-Math-on-Text"><a href="#Scenario-Math-on-Text" class="headerlink" title="Scenario: Math on Text"></a>Scenario: Math on Text</h3><p><strong>❌ The Wrong Way</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#x27; Crashes if A1 contains text</span><br><span class="line">Range(&quot;B1&quot;).Value = Range(&quot;A1&quot;).Value * 2</span><br></pre></td></tr></table></figure>
+
+<p><strong>✅ The Right Way</strong></p>
+<p>VBA</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Sub FixTypeMismatch()</span><br><span class="line">    If IsNumeric(Range(&quot;A1&quot;).Value) Then</span><br><span class="line">        Range(&quot;B1&quot;).Value = Range(&quot;A1&quot;).Value * 2</span><br><span class="line">    Else</span><br><span class="line">        MsgBox &quot;Cell A1 is not a number!&quot;</span><br><span class="line">    End If</span><br><span class="line">End Sub</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2025/12/09/Fix-Error-13/" data-id="cuidyfH7-Ew2TFlI8xsxXM7_6" data-title="How to Fix Runtime Error 13 (Type Mismatch)" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Runtime-Error-13/" rel="tag">Runtime Error 13</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/VBA-Error/" rel="tag">VBA Error</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-Fix-Error-9" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2025/12/09/Fix-Error-9/" class="article-date">
+  <time class="dt-published" datetime="2025-12-09T03:00:00.000Z" itemprop="datePublished">2025-12-09</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Troubleshooting/">Troubleshooting</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2025/12/09/Fix-Error-9/">How to Fix Runtime Error 9 (Subscript out of range)</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>“Runtime Error 9: Subscript out of range” occurs when your code attempts to access a member of a collection or an array that does not exist. Think of it as asking for “Drawer 5” when the cabinet only has 4 drawers.</p>
+<h2 id="Common-Causes"><a href="#Common-Causes" class="headerlink" title="Common Causes"></a>Common Causes</h2><ol>
+<li><strong>Sheet Name Spelling:</strong> The tab name in Excel doesn’t match the code exactly (e.g., “Sheet1 “ vs “Sheet1”).</li>
+<li><strong>Array Limits:</strong> Trying to access index 5 in an array that only goes up to 3.</li>
+<li><strong>Closed Workbooks:</strong> Trying to reference a workbook that isn’t open.</li>
+</ol>
+<h2 id="The-Solution"><a href="#The-Solution" class="headerlink" title="The Solution"></a>The Solution</h2><h3 id="Scenario-Referencing-a-Worksheet"><a href="#Scenario-Referencing-a-Worksheet" class="headerlink" title="Scenario: Referencing a Worksheet"></a>Scenario: Referencing a Worksheet</h3><p><strong>❌ The Wrong Way</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#x27; Crashes if &quot;DataSheet&quot; does not exist</span><br><span class="line">Worksheets(&quot;DataSheet&quot;).Activate</span><br></pre></td></tr></table></figure>
+
+<p><strong>✅ The Right Way</strong></p>
+<p>VBA</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Sub FixError9_Sheet()</span><br><span class="line">    On Error Resume Next</span><br><span class="line">    Worksheets(&quot;DataSheet&quot;).Activate</span><br><span class="line">    If Err.Number = 9 Then</span><br><span class="line">        MsgBox &quot;Error: Sheet &#x27;DataSheet&#x27; not found.&quot;</span><br><span class="line">    End If</span><br><span class="line">    On Error GoTo 0</span><br><span class="line">End Sub</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2025/12/09/Fix-Error-9/" data-id="cuidiL_CCug36llcBu7Kq4VjX" data-title="How to Fix Runtime Error 9 (Subscript out of range)" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Runtime-Error-9/" rel="tag">Runtime Error 9</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/VBA-Error/" rel="tag">VBA Error</a></li></ul>
+
     </footer>
   </div>
   
@@ -136,12 +430,33 @@
           <aside id="sidebar">
   
     
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Automation-Scripts/">Automation Scripts</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Troubleshooting/">Troubleshooting</a></li></ul>
+    </div>
+  </div>
+
 
   
     
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Automation/" rel="tag">Automation</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PDF/" rel="tag">PDF</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Runtime-Error-13/" rel="tag">Runtime Error 13</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Runtime-Error-424/" rel="tag">Runtime Error 424</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Runtime-Error-9/" rel="tag">Runtime Error 9</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VBA-Error/" rel="tag">VBA Error</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VBA-Script/" rel="tag">VBA Script</a></li></ul>
+    </div>
+  </div>
+
 
   
     
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Automation/" style="font-size: 15px;">Automation</a> <a href="/tags/PDF/" style="font-size: 10px;">PDF</a> <a href="/tags/Runtime-Error-13/" style="font-size: 10px;">Runtime Error 13</a> <a href="/tags/Runtime-Error-424/" style="font-size: 10px;">Runtime Error 424</a> <a href="/tags/Runtime-Error-9/" style="font-size: 10px;">Runtime Error 9</a> <a href="/tags/VBA-Error/" style="font-size: 20px;">VBA Error</a> <a href="/tags/VBA-Script/" style="font-size: 10px;">VBA Script</a>
+    </div>
+  </div>
+
   
     
   <div class="widget-wrap">
@@ -161,6 +476,22 @@
         
           <li>
             <a href="/2025/12/09/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2025/12/09/Save-As-PDF/">VBA Script to Save Active Sheet as PDF</a>
+          </li>
+        
+          <li>
+            <a href="/2025/12/09/Merge-Files/">How to Merge Multiple Excel Files into One (VBA Script)</a>
+          </li>
+        
+          <li>
+            <a href="/2025/12/09/Fix-Error-424/">How to Fix Runtime Error 424 (Object Required)</a>
+          </li>
+        
+          <li>
+            <a href="/2025/12/09/Fix-Error-13/">How to Fix Runtime Error 13 (Type Mismatch)</a>
           </li>
         
       </ul>

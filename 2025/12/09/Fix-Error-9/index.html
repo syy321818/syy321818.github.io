@@ -4,17 +4,20 @@
   <meta charset="utf-8">
   
   
-  <title>Archives: 2025/12 | Excel VBA Fixer</title>
+  <title>How to Fix Runtime Error 9 (Subscript out of range) | Excel VBA Fixer</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="The ultimate library for fixing Excel VBA Runtime Errors (1004, 9, 13) and ready-to-use automation scripts.">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Excel VBA Fixer">
-<meta property="og:url" content="http://example.com/archives/2025/12/index.html">
+  <meta name="description" content="Introduction“Runtime Error 9: Subscript out of range” occurs when your code attempts to access a member of a collection or an array that does not exist. Think of it as asking for “Drawer 5” when the c">
+<meta property="og:type" content="article">
+<meta property="og:title" content="How to Fix Runtime Error 9 (Subscript out of range)">
+<meta property="og:url" content="http://example.com/2025/12/09/Fix-Error-9/index.html">
 <meta property="og:site_name" content="Excel VBA Fixer">
-<meta property="og:description" content="The ultimate library for fixing Excel VBA Runtime Errors (1004, 9, 13) and ready-to-use automation scripts.">
+<meta property="og:description" content="Introduction“Runtime Error 9: Subscript out of range” occurs when your code attempts to access a member of a collection or an array that does not exist. Think of it as asking for “Drawer 5” when the c">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2025-12-09T03:00:00.000Z">
+<meta property="article:modified_time" content="2025-12-09T13:54:33.471Z">
 <meta property="article:author" content="Admin">
-<meta property="article:tag" content="Excel VBA, VBA Error Codes, Automation, Macros, Runtime Error 1004, Excel Scripts">
+<meta property="article:tag" content="Runtime Error 9">
+<meta property="article:tag" content="VBA Error">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternate" href="/atom.xml" title="Excel VBA Fixer" type="application/atom+xml">
@@ -76,134 +79,73 @@
 </header>
 
       <div class="outer">
-        <section id="main">
-  
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2025" class="archive-year">2025</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2025/12/09/hello-world/" class="archive-article-date">
-  <time class="dt-published" datetime="2025-12-09T09:07:51.821Z" itemprop="datePublished">Dec 9</time>
+        <section id="main"><article id="post-Fix-Error-9" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2025/12/09/Fix-Error-9/" class="article-date">
+  <time class="dt-published" datetime="2025-12-09T03:00:00.000Z" itemprop="datePublished">2025-12-09</time>
 </a>
-      
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Troubleshooting/">Troubleshooting</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2025/12/09/hello-world/">Hello World</a>
+    <h1 class="p-name article-title" itemprop="headline name">
+      How to Fix Runtime Error 9 (Subscript out of range)
     </h1>
   
 
-    </header>
-  </div>
-</article>
-  
+      </header>
     
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2025/12/09/Save-As-PDF/" class="archive-article-date">
-  <time class="dt-published" datetime="2025-12-09T05:30:00.000Z" itemprop="datePublished">Dec 9</time>
-</a>
+    <div class="e-content article-entry" itemprop="articleBody">
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2025/12/09/Save-As-PDF/">VBA Script to Save Active Sheet as PDF</a>
-    </h1>
-  
+        <h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>“Runtime Error 9: Subscript out of range” occurs when your code attempts to access a member of a collection or an array that does not exist. Think of it as asking for “Drawer 5” when the cabinet only has 4 drawers.</p>
+<h2 id="Common-Causes"><a href="#Common-Causes" class="headerlink" title="Common Causes"></a>Common Causes</h2><ol>
+<li><strong>Sheet Name Spelling:</strong> The tab name in Excel doesn’t match the code exactly (e.g., “Sheet1 “ vs “Sheet1”).</li>
+<li><strong>Array Limits:</strong> Trying to access index 5 in an array that only goes up to 3.</li>
+<li><strong>Closed Workbooks:</strong> Trying to reference a workbook that isn’t open.</li>
+</ol>
+<h2 id="The-Solution"><a href="#The-Solution" class="headerlink" title="The Solution"></a>The Solution</h2><h3 id="Scenario-Referencing-a-Worksheet"><a href="#Scenario-Referencing-a-Worksheet" class="headerlink" title="Scenario: Referencing a Worksheet"></a>Scenario: Referencing a Worksheet</h3><p><strong>❌ The Wrong Way</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#x27; Crashes if &quot;DataSheet&quot; does not exist</span><br><span class="line">Worksheets(&quot;DataSheet&quot;).Activate</span><br></pre></td></tr></table></figure>
 
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2025/12/09/Merge-Files/" class="archive-article-date">
-  <time class="dt-published" datetime="2025-12-09T05:00:00.000Z" itemprop="datePublished">Dec 9</time>
-</a>
+<p><strong>✅ The Right Way</strong></p>
+<p>VBA</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Sub FixError9_Sheet()</span><br><span class="line">    On Error Resume Next</span><br><span class="line">    Worksheets(&quot;DataSheet&quot;).Activate</span><br><span class="line">    If Err.Number = 9 Then</span><br><span class="line">        MsgBox &quot;Error: Sheet &#x27;DataSheet&#x27; not found.&quot;</span><br><span class="line">    End If</span><br><span class="line">    On Error GoTo 0</span><br><span class="line">End Sub</span><br></pre></td></tr></table></figure>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2025/12/09/Merge-Files/">How to Merge Multiple Excel Files into One (VBA Script)</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2025/12/09/Fix-Error-424/" class="archive-article-date">
-  <time class="dt-published" datetime="2025-12-09T04:00:00.000Z" itemprop="datePublished">Dec 9</time>
-</a>
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2025/12/09/Fix-Error-9/" data-id="cuidiL_CCug36llcBu7Kq4VjX" data-title="How to Fix Runtime Error 9 (Subscript out of range)" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2025/12/09/Fix-Error-424/">How to Fix Runtime Error 424 (Object Required)</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2025/12/09/Fix-Error-13/" class="archive-article-date">
-  <time class="dt-published" datetime="2025-12-09T03:30:00.000Z" itemprop="datePublished">Dec 9</time>
-</a>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2025/12/09/Fix-Error-13/">How to Fix Runtime Error 13 (Type Mismatch)</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2025/12/09/Fix-Error-9/" class="archive-article-date">
-  <time class="dt-published" datetime="2025-12-09T03:00:00.000Z" itemprop="datePublished">Dec 9</time>
-</a>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2025/12/09/Fix-Error-9/">How to Fix Runtime Error 9 (Subscript out of range)</a>
-    </h1>
-  
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Runtime-Error-9/" rel="tag">Runtime Error 9</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/VBA-Error/" rel="tag">VBA Error</a></li></ul>
 
-    </header>
+    </footer>
   </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2025/12/09/Fix-Error-13/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          How to Fix Runtime Error 13 (Type Mismatch)
+        
+      </div>
+    </a>
+  
+  
+</nav>
+
+  
 </article>
-  
-  
-    </div></section>
-  
 
 
 </section>
