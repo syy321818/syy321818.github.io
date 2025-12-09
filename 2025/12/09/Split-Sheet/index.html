@@ -5,17 +5,17 @@
   <meta name="google-site-verification" content="pScSkgvNqFCRfIzOhooE6_SYAFkdLDdmWp2tD39941I" />
   
   
-  <title>How to Merge Multiple Excel Files into One (VBA Script) | Excel VBA Fixer</title>
+  <title>How to Split Data into Multiple Excel Files (VBA Script) | Excel VBA Fixer</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="A ready-to-use VBA macro to loop through a folder and combine all Excel files into one master workbook.">
+  <meta name="description" content="A powerful VBA macro to filter a column and save each unique value into a separate Excel workbook automatically.">
 <meta property="og:type" content="article">
-<meta property="og:title" content="How to Merge Multiple Excel Files into One (VBA Script)">
-<meta property="og:url" content="https://syy321818.github.io/2025/12/09/Merge-Files/index.html">
+<meta property="og:title" content="How to Split Data into Multiple Excel Files (VBA Script)">
+<meta property="og:url" content="https://syy321818.github.io/2025/12/09/Split-Sheet/index.html">
 <meta property="og:site_name" content="Excel VBA Fixer">
-<meta property="og:description" content="A ready-to-use VBA macro to loop through a folder and combine all Excel files into one master workbook.">
+<meta property="og:description" content="A powerful VBA macro to filter a column and save each unique value into a separate Excel workbook automatically.">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2025-12-09T05:00:00.000Z">
-<meta property="article:modified_time" content="2025-12-09T14:04:27.684Z">
+<meta property="article:published_time" content="2025-12-09T07:00:00.000Z">
+<meta property="article:modified_time" content="2025-12-09T18:07:48.256Z">
 <meta property="article:author" content="Admin">
 <meta property="article:tag" content="Automation">
 <meta property="article:tag" content="VBA Script">
@@ -80,10 +80,10 @@
 </header>
 
       <div class="outer">
-        <section id="main"><article id="post-Merge-Files" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+        <section id="main"><article id="post-Split-Sheet" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
-    <a href="/2025/12/09/Merge-Files/" class="article-date">
-  <time class="dt-published" datetime="2025-12-09T05:00:00.000Z" itemprop="datePublished">2025-12-09</time>
+    <a href="/2025/12/09/Split-Sheet/" class="article-date">
+  <time class="dt-published" datetime="2025-12-09T07:00:00.000Z" itemprop="datePublished">2025-12-09</time>
 </a>
     
   <div class="article-category">
@@ -98,7 +98,7 @@
         
   
     <h1 class="p-name article-title" itemprop="headline name">
-      How to Merge Multiple Excel Files into One (VBA Script)
+      How to Split Data into Multiple Excel Files (VBA Script)
     </h1>
   
 
@@ -106,38 +106,20 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <h2 id="The-Script"><a href="#The-Script" class="headerlink" title="The Script"></a>The Script</h2><p>This script loops through a folder and combines all Excel files into your current workbook.</p>
-<pre><code class="language-vba">Sub MergeFiles()
-    Dim FolderPath As String, Filename As String
-    Dim Sheet As Worksheet, LastRow As Long
-    Dim Master As Workbook, Source As Workbook
-    
-    &#39; CHANGE THIS PATH (Keep the slash at the end)
-    FolderPath = &quot;C:\Users\YourName\Documents\Files\&quot;
-    
-    Set Master = ThisWorkbook
-    Filename = Dir(FolderPath &amp; &quot;*.xlsx&quot;)
-    
-    Do While Filename &lt;&gt; &quot;&quot;
-        Set Source = Workbooks.Open(FolderPath &amp; Filename)
-        LastRow = Source.Sheets(1).Cells(Rows.Count, 1).End(xlUp).Row
-        
-        If LastRow &gt; 1 Then
-            Source.Sheets(1).Range(&quot;A2:Z&quot; &amp; LastRow).Copy
-            Master.Sheets(1).Range(&quot;A&quot; &amp; Rows.Count).End(xlUp).Offset(1, 0).PasteSpecial xlPasteValues
-        End If
-        
-        Source.Close False
-        Filename = Dir
-    Loop
-    MsgBox &quot;Done!&quot;
-End Sub
-</code></pre>
+        <h2 id="The-Problem"><a href="#The-Problem" class="headerlink" title="The Problem"></a>The Problem</h2><p>You have a master sales report with 10,000 rows for 50 different sales reps. You need to create 50 separate Excel files, one for each person, to email them individually. Doing this manually takes hours.</p>
+<h2 id="The-Solution"><a href="#The-Solution" class="headerlink" title="The Solution"></a>The Solution</h2><p>This script automates the entire process. It looks at a specific column (e.g., “Sales Rep”), filters the data for each unique person, and saves their data into a new, separate workbook named after them.</p>
+<h2 id="The-Script"><a href="#The-Script" class="headerlink" title="The Script"></a>The Script</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line">Sub SplitDataIntoFiles()</span><br><span class="line">    Dim SourceSheet As Worksheet</span><br><span class="line">    Dim NewBook As Workbook</span><br><span class="line">    Dim Rng As Range</span><br><span class="line">    Dim Cell As Range</span><br><span class="line">    Dim LastRow As Long</span><br><span class="line">    Dim SavePath As String</span><br><span class="line">    Dim ColIndex As Integer</span><br><span class="line">    </span><br><span class="line">    &#x27; SETTINGS</span><br><span class="line">    Set SourceSheet = ActiveSheet</span><br><span class="line">    SavePath = ThisWorkbook.Path &amp; &quot;\&quot; &#x27; Save in same folder</span><br><span class="line">    ColIndex = 1 &#x27; Column A is usually the category to split by (Change if needed)</span><br><span class="line">    </span><br><span class="line">    Application.ScreenUpdating = False</span><br><span class="line">    Application.DisplayAlerts = False</span><br><span class="line">    </span><br><span class="line">    &#x27; Get unique list of values in the target column</span><br><span class="line">    LastRow = SourceSheet.Cells(Rows.Count, ColIndex).End(xlUp).Row</span><br><span class="line">    SourceSheet.Range(SourceSheet.Cells(1, ColIndex), SourceSheet.Cells(LastRow, ColIndex)).AdvancedFilter _</span><br><span class="line">        Action:=xlFilterCopy, CopyToRange:=SourceSheet.Range(&quot;XFD1&quot;), Unique:=True</span><br><span class="line">        </span><br><span class="line">    &#x27; Loop through unique values</span><br><span class="line">    For Each Cell In SourceSheet.Range(&quot;XFD2&quot;, SourceSheet.Cells(Rows.Count, &quot;XFD&quot;).End(xlUp))</span><br><span class="line">        </span><br><span class="line">        &#x27; Filter and Copy</span><br><span class="line">        SourceSheet.AutoFilterMode = False</span><br><span class="line">        SourceSheet.Range(&quot;A1&quot;).AutoFilter Field:=ColIndex, Criteria1:=Cell.Value</span><br><span class="line">        </span><br><span class="line">        Set NewBook = Workbooks.Add</span><br><span class="line">        SourceSheet.UsedRange.SpecialCells(xlCellTypeVisible).Copy Destination:=NewBook.Sheets(1).Range(&quot;A1&quot;)</span><br><span class="line">        </span><br><span class="line">        &#x27; Save New File</span><br><span class="line">        NewBook.SaveAs Filename:=SavePath &amp; Cell.Value &amp; &quot;.xlsx&quot;</span><br><span class="line">        NewBook.Close SaveChanges:=False</span><br><span class="line">        </span><br><span class="line">    Next Cell</span><br><span class="line">    </span><br><span class="line">    &#x27; Cleanup</span><br><span class="line">    SourceSheet.AutoFilterMode = False</span><br><span class="line">    SourceSheet.Columns(&quot;XFD&quot;).Clear</span><br><span class="line">    Application.ScreenUpdating = True</span><br><span class="line">    Application.DisplayAlerts = True</span><br><span class="line">    </span><br><span class="line">    MsgBox &quot;Done! Files saved in: &quot; &amp; SavePath</span><br><span class="line">End Sub</span><br></pre></td></tr></table></figure>
+
+<h2 id="How-to-Use-It"><a href="#How-to-Use-It" class="headerlink" title="How to Use It"></a>How to Use It</h2><ol>
+<li>Open your Master Data sheet.</li>
+<li>Change <code>ColIndex = 1</code> in the code if you want to split by Column B (2) or C (3).</li>
+<li>Run the macro. Watch your folder fill up with separated files instantly!</li>
+</ol>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://syy321818.github.io/2025/12/09/Merge-Files/" data-id="cuidksf1YWVLDU6HqZDtsoQ9a" data-title="How to Merge Multiple Excel Files into One (VBA Script)" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://syy321818.github.io/2025/12/09/Split-Sheet/" data-id="cuidLOSGVMELn4dJtnKda_N_9" data-title="How to Split Data into Multiple Excel Files (VBA Script)" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -149,19 +131,19 @@ End Sub
     
 <nav id="article-nav">
   
-    <a href="/2025/12/09/Save-As-PDF/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2025/12/09/Delete-Blank-Rows/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Newer</strong>
       <div class="article-nav-title">
         
-          VBA Script to Save Active Sheet as PDF
+          How to Delete Blank Rows in Excel Instantly (Fast VBA Script)
         
       </div>
     </a>
   
   
-    <a href="/2025/12/09/Fix-Error-424/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2025/12/09/Save-As-PDF/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">How to Fix Runtime Error 424 (Object Required)</div>
+      <div class="article-nav-title">VBA Script to Save Active Sheet as PDF</div>
     </a>
   
 </nav>

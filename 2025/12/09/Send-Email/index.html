@@ -5,19 +5,20 @@
   <meta name="google-site-verification" content="pScSkgvNqFCRfIzOhooE6_SYAFkdLDdmWp2tD39941I" />
   
   
-  <title>How to Merge Multiple Excel Files into One (VBA Script) | Excel VBA Fixer</title>
+  <title>VBA Code to Send Email from Excel (Outlook Automation) | Excel VBA Fixer</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="A ready-to-use VBA macro to loop through a folder and combine all Excel files into one master workbook.">
+  <meta name="description" content="Learn how to automate Outlook from Excel using VBA. This script sends an email with an attachment automatically.">
 <meta property="og:type" content="article">
-<meta property="og:title" content="How to Merge Multiple Excel Files into One (VBA Script)">
-<meta property="og:url" content="https://syy321818.github.io/2025/12/09/Merge-Files/index.html">
+<meta property="og:title" content="VBA Code to Send Email from Excel (Outlook Automation)">
+<meta property="og:url" content="https://syy321818.github.io/2025/12/09/Send-Email/index.html">
 <meta property="og:site_name" content="Excel VBA Fixer">
-<meta property="og:description" content="A ready-to-use VBA macro to loop through a folder and combine all Excel files into one master workbook.">
+<meta property="og:description" content="Learn how to automate Outlook from Excel using VBA. This script sends an email with an attachment automatically.">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2025-12-09T05:00:00.000Z">
-<meta property="article:modified_time" content="2025-12-09T14:04:27.684Z">
+<meta property="article:published_time" content="2025-12-09T08:00:00.000Z">
+<meta property="article:modified_time" content="2025-12-09T18:09:43.192Z">
 <meta property="article:author" content="Admin">
 <meta property="article:tag" content="Automation">
+<meta property="article:tag" content="Email">
 <meta property="article:tag" content="VBA Script">
 <meta name="twitter:card" content="summary">
   
@@ -80,10 +81,10 @@
 </header>
 
       <div class="outer">
-        <section id="main"><article id="post-Merge-Files" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+        <section id="main"><article id="post-Send-Email" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
-    <a href="/2025/12/09/Merge-Files/" class="article-date">
-  <time class="dt-published" datetime="2025-12-09T05:00:00.000Z" itemprop="datePublished">2025-12-09</time>
+    <a href="/2025/12/09/Send-Email/" class="article-date">
+  <time class="dt-published" datetime="2025-12-09T08:00:00.000Z" itemprop="datePublished">2025-12-09</time>
 </a>
     
   <div class="article-category">
@@ -98,7 +99,7 @@
         
   
     <h1 class="p-name article-title" itemprop="headline name">
-      How to Merge Multiple Excel Files into One (VBA Script)
+      VBA Code to Send Email from Excel (Outlook Automation)
     </h1>
   
 
@@ -106,42 +107,25 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <h2 id="The-Script"><a href="#The-Script" class="headerlink" title="The Script"></a>The Script</h2><p>This script loops through a folder and combines all Excel files into your current workbook.</p>
-<pre><code class="language-vba">Sub MergeFiles()
-    Dim FolderPath As String, Filename As String
-    Dim Sheet As Worksheet, LastRow As Long
-    Dim Master As Workbook, Source As Workbook
-    
-    &#39; CHANGE THIS PATH (Keep the slash at the end)
-    FolderPath = &quot;C:\Users\YourName\Documents\Files\&quot;
-    
-    Set Master = ThisWorkbook
-    Filename = Dir(FolderPath &amp; &quot;*.xlsx&quot;)
-    
-    Do While Filename &lt;&gt; &quot;&quot;
-        Set Source = Workbooks.Open(FolderPath &amp; Filename)
-        LastRow = Source.Sheets(1).Cells(Rows.Count, 1).End(xlUp).Row
-        
-        If LastRow &gt; 1 Then
-            Source.Sheets(1).Range(&quot;A2:Z&quot; &amp; LastRow).Copy
-            Master.Sheets(1).Range(&quot;A&quot; &amp; Rows.Count).End(xlUp).Offset(1, 0).PasteSpecial xlPasteValues
-        End If
-        
-        Source.Close False
-        Filename = Dir
-    Loop
-    MsgBox &quot;Done!&quot;
-End Sub
-</code></pre>
+        <h2 id="The-Problem"><a href="#The-Problem" class="headerlink" title="The Problem"></a>The Problem</h2><p>Sending the same email to multiple people with different attachments is tedious. Doing it manually usually leads to mistakes (like attaching the wrong file or forgetting the subject line).</p>
+<h2 id="The-Solution"><a href="#The-Solution" class="headerlink" title="The Solution"></a>The Solution</h2><p>We can use VBA to “talk” to Outlook. This script creates a new email, fills in the recipient, subject, and body, attaches a specific file, and displays it for you to review (or sends it immediately).</p>
+<h2 id="The-Script"><a href="#The-Script" class="headerlink" title="The Script"></a>The Script</h2><p><em>Note: You must have Microsoft Outlook installed and logged in.</em></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">Sub SendEmailWithAttachment()</span><br><span class="line">    Dim OutApp As Object</span><br><span class="line">    Dim OutMail As Object</span><br><span class="line">    Dim FilePath As String</span><br><span class="line">    </span><br><span class="line">    &#x27; SETTINGS: The file you want to attach</span><br><span class="line">    FilePath = &quot;C:\Users\YourName\Documents\Report.pdf&quot;</span><br><span class="line">    </span><br><span class="line">    &#x27; Create Outlook Application Object (Late Binding)</span><br><span class="line">    &#x27; This works even if you haven&#x27;t enabled Outlook references manually</span><br><span class="line">    Set OutApp = CreateObject(&quot;Outlook.Application&quot;)</span><br><span class="line">    Set OutMail = OutApp.CreateItem(0)</span><br><span class="line">    </span><br><span class="line">    On Error Resume Next</span><br><span class="line">    </span><br><span class="line">    With OutMail</span><br><span class="line">        .To = &quot;client@example.com&quot;</span><br><span class="line">        .CC = &quot;&quot;</span><br><span class="line">        .BCC = &quot;&quot;</span><br><span class="line">        .Subject = &quot;Weekly Report - &quot; &amp; Date</span><br><span class="line">        .Body = &quot;Hi there,&quot; &amp; vbNewLine &amp; vbNewLine &amp; _</span><br><span class="line">                &quot;Please find the attached report.&quot; &amp; vbNewLine &amp; _</span><br><span class="line">                &quot;Best Regards,&quot; &amp; vbNewLine &amp; &quot;Your Name&quot;</span><br><span class="line">        </span><br><span class="line">        &#x27; Attach the file (Check if file exists first to avoid errors)</span><br><span class="line">        If Dir(FilePath) &lt;&gt; &quot;&quot; Then</span><br><span class="line">            .Attachments.Add FilePath</span><br><span class="line">        End If</span><br><span class="line">        </span><br><span class="line">        &#x27; Use .Display to show the email first (Recommended)</span><br><span class="line">        &#x27; Use .Send to send it immediately</span><br><span class="line">        .Display</span><br><span class="line">    End With</span><br><span class="line">    </span><br><span class="line">    On Error GoTo 0</span><br><span class="line">    </span><br><span class="line">    &#x27; Cleanup</span><br><span class="line">    Set OutMail = Nothing</span><br><span class="line">    Set OutApp = Nothing</span><br><span class="line">End Sub</span><br></pre></td></tr></table></figure>
+
+<h2 id="How-to-Customize-It"><a href="#How-to-Customize-It" class="headerlink" title="How to Customize It"></a>How to Customize It</h2><ol>
+<li><strong>Recipients:</strong> Change <code>.To = &quot;...&quot;</code> to link to a cell (e.g., <code>.To = Range(&quot;A2&quot;).Value</code>).</li>
+<li><strong>Looping:</strong> You can wrap this code in a <code>For Loop</code> to send emails to a list of people in your Excel sheet.</li>
+<li><strong>Safety:</strong> I used <code>.Display</code> so the email pops up on your screen first. Once you are confident it works, you can change it to <code>.Send</code>.</li>
+</ol>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://syy321818.github.io/2025/12/09/Merge-Files/" data-id="cuidksf1YWVLDU6HqZDtsoQ9a" data-title="How to Merge Multiple Excel Files into One (VBA Script)" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://syy321818.github.io/2025/12/09/Send-Email/" data-id="cuidEYeq3OmXtulqKJO-yfss-" data-title="VBA Code to Send Email from Excel (Outlook Automation)" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Automation/" rel="tag">Automation</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/VBA-Script/" rel="tag">VBA Script</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Automation/" rel="tag">Automation</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Email/" rel="tag">Email</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/VBA-Script/" rel="tag">VBA Script</a></li></ul>
 
     </footer>
   </div>
@@ -149,19 +133,19 @@ End Sub
     
 <nav id="article-nav">
   
-    <a href="/2025/12/09/Save-As-PDF/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2025/12/09/Excel-to-Word/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Newer</strong>
       <div class="article-nav-title">
         
-          VBA Script to Save Active Sheet as PDF
+          How to Automate Word from Excel using VBA (Contract Generator)
         
       </div>
     </a>
   
   
-    <a href="/2025/12/09/Fix-Error-424/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2025/12/09/Delete-Blank-Rows/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">How to Fix Runtime Error 424 (Object Required)</div>
+      <div class="article-nav-title">How to Delete Blank Rows in Excel Instantly (Fast VBA Script)</div>
     </a>
   
 </nav>

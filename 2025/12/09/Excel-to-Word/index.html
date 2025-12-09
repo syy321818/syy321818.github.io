@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="google-site-verification" content="pScSkgvNqFCRfIzOhooE6_SYAFkdLDdmWp2tD39941I" />
+  
+  
+  <title>How to Automate Word from Excel using VBA (Contract Generator) | Excel VBA Fixer</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Stop copy-pasting into Word templates. This VBA script opens a Word document and automatically fills in data from your Excel sheet.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="How to Automate Word from Excel using VBA (Contract Generator)">
+<meta property="og:url" content="https://syy321818.github.io/2025/12/09/Excel-to-Word/index.html">
+<meta property="og:site_name" content="Excel VBA Fixer">
+<meta property="og:description" content="Stop copy-pasting into Word templates. This VBA script opens a Word document and automatically fills in data from your Excel sheet.">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2025-12-09T08:30:00.000Z">
+<meta property="article:modified_time" content="2025-12-09T18:12:09.424Z">
+<meta property="article:author" content="Admin">
+<meta property="article:tag" content="Automation">
+<meta property="article:tag" content="VBA Script">
+<meta property="article:tag" content="Word Integration">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Excel VBA Fixer" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css">
+
+<meta name="generator" content="Hexo 8.1.1"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Excel VBA Fixer</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">Troubleshooting &amp; Automation Scripts</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://syy321818.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-Excel-to-Word" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2025/12/09/Excel-to-Word/" class="article-date">
+  <time class="dt-published" datetime="2025-12-09T08:30:00.000Z" itemprop="datePublished">2025-12-09</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Automation-Scripts/">Automation Scripts</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      How to Automate Word from Excel using VBA (Contract Generator)
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="The-Problem"><a href="#The-Problem" class="headerlink" title="The Problem"></a>The Problem</h2><p>You have a standard contract or invitation letter in Word. You need to generate 100 copies for 100 different clients listed in Excel. Doing a “Mail Merge” is okay, but it saves everything in one giant file. You want separate files for each person.</p>
+<h2 id="The-Solution"><a href="#The-Solution" class="headerlink" title="The Solution"></a>The Solution</h2><p>We use VBA to control Microsoft Word. This script opens your Word template, searches for placeholders (like <code>[Name]</code>), replaces them with data from Excel, and saves a new document.</p>
+<h2 id="The-Script"><a href="#The-Script" class="headerlink" title="The Script"></a>The Script</h2><p><em>Note: You need to add a reference to “Microsoft Word Object Library” in VBA (Tools &gt; References), OR just use this “Late Binding” code which works automatically.</em></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line">Sub CreateWordDocuments()</span><br><span class="line">    Dim WordApp As Object</span><br><span class="line">    Dim WordDoc As Object</span><br><span class="line">    Dim SavePath As String</span><br><span class="line">    Dim TemplatePath As String</span><br><span class="line">    Dim ClientName As String</span><br><span class="line">    Dim Amount As String</span><br><span class="line">    Dim RowIndex As Integer</span><br><span class="line">    </span><br><span class="line">    &#x27; SETTINGS</span><br><span class="line">    SavePath = &quot;C:\Users\YourName\Documents\Contracts\&quot;</span><br><span class="line">    TemplatePath = &quot;C:\Users\YourName\Documents\Template.docx&quot;</span><br><span class="line">    </span><br><span class="line">    &#x27; Create Word Application</span><br><span class="line">    Set WordApp = CreateObject(&quot;Word.Application&quot;)</span><br><span class="line">    WordApp.Visible = True &#x27; Set to False to run in background</span><br><span class="line">    </span><br><span class="line">    &#x27; Loop through rows 2 to 5 (Change as needed)</span><br><span class="line">    For RowIndex = 2 To 5</span><br><span class="line">        ClientName = Cells(RowIndex, 1).Value &#x27; Column A</span><br><span class="line">        Amount = Cells(RowIndex, 2).Value     &#x27; Column B</span><br><span class="line">        </span><br><span class="line">        &#x27; Open the template</span><br><span class="line">        Set WordDoc = WordApp.Documents.Open(TemplatePath)</span><br><span class="line">        </span><br><span class="line">        &#x27; Find and Replace [Name]</span><br><span class="line">        With WordDoc.Content.Find</span><br><span class="line">            .Text = &quot;[Name]&quot;</span><br><span class="line">            .Replacement.Text = ClientName</span><br><span class="line">            .Execute Replace:=2 &#x27; 2 = wdReplaceAll</span><br><span class="line">        End With</span><br><span class="line">        </span><br><span class="line">        &#x27; Find and Replace [Amount]</span><br><span class="line">        With WordDoc.Content.Find</span><br><span class="line">            .Text = &quot;[Amount]&quot;</span><br><span class="line">            .Replacement.Text = Amount</span><br><span class="line">            .Execute Replace:=2</span><br><span class="line">        End With</span><br><span class="line">        </span><br><span class="line">        &#x27; Save as new file</span><br><span class="line">        WordDoc.SaveAs2 SavePath &amp; ClientName &amp; &quot;_Contract.docx&quot;</span><br><span class="line">        WordDoc.Close</span><br><span class="line">    Next RowIndex</span><br><span class="line">    </span><br><span class="line">    WordApp.Quit</span><br><span class="line">    Set WordDoc = Nothing</span><br><span class="line">    Set WordApp = Nothing</span><br><span class="line">    </span><br><span class="line">    MsgBox &quot;Contracts generated successfully!&quot;</span><br><span class="line">End Sub</span><br></pre></td></tr></table></figure>
+
+<h2 id="How-to-Prepare-Your-Word-Template"><a href="#How-to-Prepare-Your-Word-Template" class="headerlink" title="How to Prepare Your Word Template"></a>How to Prepare Your Word Template</h2><ol>
+<li>Create a Word doc.</li>
+<li>Where you want the name to appear, type <code>[Name]</code>.</li>
+<li>Where you want the money to appear, type <code>[Amount]</code>.</li>
+<li>Save it and update the <code>TemplatePath</code> in the code.</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://syy321818.github.io/2025/12/09/Excel-to-Word/" data-id="cuidtbIytKgVXCIijURFasrC2" data-title="How to Automate Word from Excel using VBA (Contract Generator)" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Automation/" rel="tag">Automation</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/VBA-Script/" rel="tag">VBA Script</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Word-Integration/" rel="tag">Word Integration</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2025/12/09/hello-world/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Hello World
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2025/12/09/Send-Email/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">VBA Code to Send Email from Excel (Outlook Automation)</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Automation-Scripts/">Automation Scripts</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Troubleshooting/">Troubleshooting</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Automation/" rel="tag">Automation</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Data-Cleaning/" rel="tag">Data Cleaning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Email/" rel="tag">Email</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PDF/" rel="tag">PDF</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Runtime-Error-13/" rel="tag">Runtime Error 13</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Runtime-Error-424/" rel="tag">Runtime Error 424</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Runtime-Error-9/" rel="tag">Runtime Error 9</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VBA-Error/" rel="tag">VBA Error</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VBA-Script/" rel="tag">VBA Script</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Word-Integration/" rel="tag">Word Integration</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Automation/" style="font-size: 20px;">Automation</a> <a href="/tags/Data-Cleaning/" style="font-size: 10px;">Data Cleaning</a> <a href="/tags/Email/" style="font-size: 10px;">Email</a> <a href="/tags/PDF/" style="font-size: 10px;">PDF</a> <a href="/tags/Runtime-Error-13/" style="font-size: 10px;">Runtime Error 13</a> <a href="/tags/Runtime-Error-424/" style="font-size: 10px;">Runtime Error 424</a> <a href="/tags/Runtime-Error-9/" style="font-size: 10px;">Runtime Error 9</a> <a href="/tags/VBA-Error/" style="font-size: 13.33px;">VBA Error</a> <a href="/tags/VBA-Script/" style="font-size: 16.67px;">VBA Script</a> <a href="/tags/Word-Integration/" style="font-size: 10px;">Word Integration</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/12/">December 2025</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2025/12/09/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2025/12/09/Excel-to-Word/">How to Automate Word from Excel using VBA (Contract Generator)</a>
+          </li>
+        
+          <li>
+            <a href="/2025/12/09/Send-Email/">VBA Code to Send Email from Excel (Outlook Automation)</a>
+          </li>
+        
+          <li>
+            <a href="/2025/12/09/Delete-Blank-Rows/">How to Delete Blank Rows in Excel Instantly (Fast VBA Script)</a>
+          </li>
+        
+          <li>
+            <a href="/2025/12/09/Split-Sheet/">How to Split Data into Multiple Excel Files (VBA Script)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2025 Admin<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

@@ -118,10 +118,226 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://syy321818.github.io/2025/12/09/hello-world/" data-id="cuid6FPzMEvDJ4Qzv2y7tlsz4" data-title="Hello World" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://syy321818.github.io/2025/12/09/hello-world/" data-id="cuidh10EeZJfzmZp73H-jckp8" data-title="Hello World" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-Excel-to-Word" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2025/12/09/Excel-to-Word/" class="article-date">
+  <time class="dt-published" datetime="2025-12-09T08:30:00.000Z" itemprop="datePublished">2025-12-09</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Automation-Scripts/">Automation Scripts</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2025/12/09/Excel-to-Word/">How to Automate Word from Excel using VBA (Contract Generator)</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="The-Problem"><a href="#The-Problem" class="headerlink" title="The Problem"></a>The Problem</h2><p>You have a standard contract or invitation letter in Word. You need to generate 100 copies for 100 different clients listed in Excel. Doing a “Mail Merge” is okay, but it saves everything in one giant file. You want separate files for each person.</p>
+<h2 id="The-Solution"><a href="#The-Solution" class="headerlink" title="The Solution"></a>The Solution</h2><p>We use VBA to control Microsoft Word. This script opens your Word template, searches for placeholders (like <code>[Name]</code>), replaces them with data from Excel, and saves a new document.</p>
+<h2 id="The-Script"><a href="#The-Script" class="headerlink" title="The Script"></a>The Script</h2><p><em>Note: You need to add a reference to “Microsoft Word Object Library” in VBA (Tools &gt; References), OR just use this “Late Binding” code which works automatically.</em></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line">Sub CreateWordDocuments()</span><br><span class="line">    Dim WordApp As Object</span><br><span class="line">    Dim WordDoc As Object</span><br><span class="line">    Dim SavePath As String</span><br><span class="line">    Dim TemplatePath As String</span><br><span class="line">    Dim ClientName As String</span><br><span class="line">    Dim Amount As String</span><br><span class="line">    Dim RowIndex As Integer</span><br><span class="line">    </span><br><span class="line">    &#x27; SETTINGS</span><br><span class="line">    SavePath = &quot;C:\Users\YourName\Documents\Contracts\&quot;</span><br><span class="line">    TemplatePath = &quot;C:\Users\YourName\Documents\Template.docx&quot;</span><br><span class="line">    </span><br><span class="line">    &#x27; Create Word Application</span><br><span class="line">    Set WordApp = CreateObject(&quot;Word.Application&quot;)</span><br><span class="line">    WordApp.Visible = True &#x27; Set to False to run in background</span><br><span class="line">    </span><br><span class="line">    &#x27; Loop through rows 2 to 5 (Change as needed)</span><br><span class="line">    For RowIndex = 2 To 5</span><br><span class="line">        ClientName = Cells(RowIndex, 1).Value &#x27; Column A</span><br><span class="line">        Amount = Cells(RowIndex, 2).Value     &#x27; Column B</span><br><span class="line">        </span><br><span class="line">        &#x27; Open the template</span><br><span class="line">        Set WordDoc = WordApp.Documents.Open(TemplatePath)</span><br><span class="line">        </span><br><span class="line">        &#x27; Find and Replace [Name]</span><br><span class="line">        With WordDoc.Content.Find</span><br><span class="line">            .Text = &quot;[Name]&quot;</span><br><span class="line">            .Replacement.Text = ClientName</span><br><span class="line">            .Execute Replace:=2 &#x27; 2 = wdReplaceAll</span><br><span class="line">        End With</span><br><span class="line">        </span><br><span class="line">        &#x27; Find and Replace [Amount]</span><br><span class="line">        With WordDoc.Content.Find</span><br><span class="line">            .Text = &quot;[Amount]&quot;</span><br><span class="line">            .Replacement.Text = Amount</span><br><span class="line">            .Execute Replace:=2</span><br><span class="line">        End With</span><br><span class="line">        </span><br><span class="line">        &#x27; Save as new file</span><br><span class="line">        WordDoc.SaveAs2 SavePath &amp; ClientName &amp; &quot;_Contract.docx&quot;</span><br><span class="line">        WordDoc.Close</span><br><span class="line">    Next RowIndex</span><br><span class="line">    </span><br><span class="line">    WordApp.Quit</span><br><span class="line">    Set WordDoc = Nothing</span><br><span class="line">    Set WordApp = Nothing</span><br><span class="line">    </span><br><span class="line">    MsgBox &quot;Contracts generated successfully!&quot;</span><br><span class="line">End Sub</span><br></pre></td></tr></table></figure>
+
+<h2 id="How-to-Prepare-Your-Word-Template"><a href="#How-to-Prepare-Your-Word-Template" class="headerlink" title="How to Prepare Your Word Template"></a>How to Prepare Your Word Template</h2><ol>
+<li>Create a Word doc.</li>
+<li>Where you want the name to appear, type <code>[Name]</code>.</li>
+<li>Where you want the money to appear, type <code>[Amount]</code>.</li>
+<li>Save it and update the <code>TemplatePath</code> in the code.</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://syy321818.github.io/2025/12/09/Excel-to-Word/" data-id="cuidtbIytKgVXCIijURFasrC2" data-title="How to Automate Word from Excel using VBA (Contract Generator)" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Automation/" rel="tag">Automation</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/VBA-Script/" rel="tag">VBA Script</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Word-Integration/" rel="tag">Word Integration</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-Send-Email" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2025/12/09/Send-Email/" class="article-date">
+  <time class="dt-published" datetime="2025-12-09T08:00:00.000Z" itemprop="datePublished">2025-12-09</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Automation-Scripts/">Automation Scripts</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2025/12/09/Send-Email/">VBA Code to Send Email from Excel (Outlook Automation)</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="The-Problem"><a href="#The-Problem" class="headerlink" title="The Problem"></a>The Problem</h2><p>Sending the same email to multiple people with different attachments is tedious. Doing it manually usually leads to mistakes (like attaching the wrong file or forgetting the subject line).</p>
+<h2 id="The-Solution"><a href="#The-Solution" class="headerlink" title="The Solution"></a>The Solution</h2><p>We can use VBA to “talk” to Outlook. This script creates a new email, fills in the recipient, subject, and body, attaches a specific file, and displays it for you to review (or sends it immediately).</p>
+<h2 id="The-Script"><a href="#The-Script" class="headerlink" title="The Script"></a>The Script</h2><p><em>Note: You must have Microsoft Outlook installed and logged in.</em></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">Sub SendEmailWithAttachment()</span><br><span class="line">    Dim OutApp As Object</span><br><span class="line">    Dim OutMail As Object</span><br><span class="line">    Dim FilePath As String</span><br><span class="line">    </span><br><span class="line">    &#x27; SETTINGS: The file you want to attach</span><br><span class="line">    FilePath = &quot;C:\Users\YourName\Documents\Report.pdf&quot;</span><br><span class="line">    </span><br><span class="line">    &#x27; Create Outlook Application Object (Late Binding)</span><br><span class="line">    &#x27; This works even if you haven&#x27;t enabled Outlook references manually</span><br><span class="line">    Set OutApp = CreateObject(&quot;Outlook.Application&quot;)</span><br><span class="line">    Set OutMail = OutApp.CreateItem(0)</span><br><span class="line">    </span><br><span class="line">    On Error Resume Next</span><br><span class="line">    </span><br><span class="line">    With OutMail</span><br><span class="line">        .To = &quot;client@example.com&quot;</span><br><span class="line">        .CC = &quot;&quot;</span><br><span class="line">        .BCC = &quot;&quot;</span><br><span class="line">        .Subject = &quot;Weekly Report - &quot; &amp; Date</span><br><span class="line">        .Body = &quot;Hi there,&quot; &amp; vbNewLine &amp; vbNewLine &amp; _</span><br><span class="line">                &quot;Please find the attached report.&quot; &amp; vbNewLine &amp; _</span><br><span class="line">                &quot;Best Regards,&quot; &amp; vbNewLine &amp; &quot;Your Name&quot;</span><br><span class="line">        </span><br><span class="line">        &#x27; Attach the file (Check if file exists first to avoid errors)</span><br><span class="line">        If Dir(FilePath) &lt;&gt; &quot;&quot; Then</span><br><span class="line">            .Attachments.Add FilePath</span><br><span class="line">        End If</span><br><span class="line">        </span><br><span class="line">        &#x27; Use .Display to show the email first (Recommended)</span><br><span class="line">        &#x27; Use .Send to send it immediately</span><br><span class="line">        .Display</span><br><span class="line">    End With</span><br><span class="line">    </span><br><span class="line">    On Error GoTo 0</span><br><span class="line">    </span><br><span class="line">    &#x27; Cleanup</span><br><span class="line">    Set OutMail = Nothing</span><br><span class="line">    Set OutApp = Nothing</span><br><span class="line">End Sub</span><br></pre></td></tr></table></figure>
+
+<h2 id="How-to-Customize-It"><a href="#How-to-Customize-It" class="headerlink" title="How to Customize It"></a>How to Customize It</h2><ol>
+<li><strong>Recipients:</strong> Change <code>.To = &quot;...&quot;</code> to link to a cell (e.g., <code>.To = Range(&quot;A2&quot;).Value</code>).</li>
+<li><strong>Looping:</strong> You can wrap this code in a <code>For Loop</code> to send emails to a list of people in your Excel sheet.</li>
+<li><strong>Safety:</strong> I used <code>.Display</code> so the email pops up on your screen first. Once you are confident it works, you can change it to <code>.Send</code>.</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://syy321818.github.io/2025/12/09/Send-Email/" data-id="cuidEYeq3OmXtulqKJO-yfss-" data-title="VBA Code to Send Email from Excel (Outlook Automation)" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Automation/" rel="tag">Automation</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Email/" rel="tag">Email</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/VBA-Script/" rel="tag">VBA Script</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-Delete-Blank-Rows" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2025/12/09/Delete-Blank-Rows/" class="article-date">
+  <time class="dt-published" datetime="2025-12-09T07:30:00.000Z" itemprop="datePublished">2025-12-09</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Automation-Scripts/">Automation Scripts</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2025/12/09/Delete-Blank-Rows/">How to Delete Blank Rows in Excel Instantly (Fast VBA Script)</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="The-Problem"><a href="#The-Problem" class="headerlink" title="The Problem"></a>The Problem</h2><p>You export data from a system, but it comes with random empty rows scattered everywhere.<br>If you use a standard VBA loop to check every row one by one (<code>For i = 1 to 10000...</code>), Excel will freeze and take forever.</p>
+<h2 id="The-Solution"><a href="#The-Solution" class="headerlink" title="The Solution"></a>The Solution</h2><p>We don’t use a loop. We use Excel’s built-in <code>SpecialCells</code> feature. It identifies all blank cells at once and deletes them in a single batch operation. It’s instant.</p>
+<h2 id="The-Script"><a href="#The-Script" class="headerlink" title="The Script"></a>The Script</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">Sub DeleteBlankRowsFast()</span><br><span class="line">    Dim SourceSheet As Worksheet</span><br><span class="line">    Dim Rng As Range</span><br><span class="line">    </span><br><span class="line">    Set SourceSheet = ActiveSheet</span><br><span class="line">    </span><br><span class="line">    On Error Resume Next &#x27; Prevent error if no blanks found</span><br><span class="line">    </span><br><span class="line">    &#x27; Target Column A to check for blanks</span><br><span class="line">    &#x27; Change &quot;A:A&quot; if you want to check a different column</span><br><span class="line">    Set Rng = SourceSheet.Columns(&quot;A:A&quot;).SpecialCells(xlCellTypeBlanks)</span><br><span class="line">    </span><br><span class="line">    If Not Rng Is Nothing Then</span><br><span class="line">        Rng.EntireRow.Delete</span><br><span class="line">        MsgBox &quot;All blank rows deleted successfully!&quot;, vbInformation</span><br><span class="line">    Else</span><br><span class="line">        MsgBox &quot;No blank rows found.&quot;, vbExclamation</span><br><span class="line">    End If</span><br><span class="line">    </span><br><span class="line">    On Error GoTo 0</span><br><span class="line">End Sub</span><br></pre></td></tr></table></figure>
+
+<h2 id="How-It-Works"><a href="#How-It-Works" class="headerlink" title="How It Works"></a>How It Works</h2><ol>
+<li><strong>No Loops:</strong> It doesn’t look at Row 1, then Row 2, then Row 3.</li>
+<li><strong>Batch Select:</strong> It grabs every blank cell in Column A simultaneously.</li>
+<li><strong>Batch Delete:</strong> It deletes the entire rows for those blanks in one click.</li>
+</ol>
+<p><em>Note: This script assumes that if Column A is empty, the whole row should be deleted.</em></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://syy321818.github.io/2025/12/09/Delete-Blank-Rows/" data-id="cuidzVyvi7_otLwtcCfojoW77" data-title="How to Delete Blank Rows in Excel Instantly (Fast VBA Script)" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Automation/" rel="tag">Automation</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Data-Cleaning/" rel="tag">Data Cleaning</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/VBA-Script/" rel="tag">VBA Script</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-Split-Sheet" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2025/12/09/Split-Sheet/" class="article-date">
+  <time class="dt-published" datetime="2025-12-09T07:00:00.000Z" itemprop="datePublished">2025-12-09</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Automation-Scripts/">Automation Scripts</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2025/12/09/Split-Sheet/">How to Split Data into Multiple Excel Files (VBA Script)</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="The-Problem"><a href="#The-Problem" class="headerlink" title="The Problem"></a>The Problem</h2><p>You have a master sales report with 10,000 rows for 50 different sales reps. You need to create 50 separate Excel files, one for each person, to email them individually. Doing this manually takes hours.</p>
+<h2 id="The-Solution"><a href="#The-Solution" class="headerlink" title="The Solution"></a>The Solution</h2><p>This script automates the entire process. It looks at a specific column (e.g., “Sales Rep”), filters the data for each unique person, and saves their data into a new, separate workbook named after them.</p>
+<h2 id="The-Script"><a href="#The-Script" class="headerlink" title="The Script"></a>The Script</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line">Sub SplitDataIntoFiles()</span><br><span class="line">    Dim SourceSheet As Worksheet</span><br><span class="line">    Dim NewBook As Workbook</span><br><span class="line">    Dim Rng As Range</span><br><span class="line">    Dim Cell As Range</span><br><span class="line">    Dim LastRow As Long</span><br><span class="line">    Dim SavePath As String</span><br><span class="line">    Dim ColIndex As Integer</span><br><span class="line">    </span><br><span class="line">    &#x27; SETTINGS</span><br><span class="line">    Set SourceSheet = ActiveSheet</span><br><span class="line">    SavePath = ThisWorkbook.Path &amp; &quot;\&quot; &#x27; Save in same folder</span><br><span class="line">    ColIndex = 1 &#x27; Column A is usually the category to split by (Change if needed)</span><br><span class="line">    </span><br><span class="line">    Application.ScreenUpdating = False</span><br><span class="line">    Application.DisplayAlerts = False</span><br><span class="line">    </span><br><span class="line">    &#x27; Get unique list of values in the target column</span><br><span class="line">    LastRow = SourceSheet.Cells(Rows.Count, ColIndex).End(xlUp).Row</span><br><span class="line">    SourceSheet.Range(SourceSheet.Cells(1, ColIndex), SourceSheet.Cells(LastRow, ColIndex)).AdvancedFilter _</span><br><span class="line">        Action:=xlFilterCopy, CopyToRange:=SourceSheet.Range(&quot;XFD1&quot;), Unique:=True</span><br><span class="line">        </span><br><span class="line">    &#x27; Loop through unique values</span><br><span class="line">    For Each Cell In SourceSheet.Range(&quot;XFD2&quot;, SourceSheet.Cells(Rows.Count, &quot;XFD&quot;).End(xlUp))</span><br><span class="line">        </span><br><span class="line">        &#x27; Filter and Copy</span><br><span class="line">        SourceSheet.AutoFilterMode = False</span><br><span class="line">        SourceSheet.Range(&quot;A1&quot;).AutoFilter Field:=ColIndex, Criteria1:=Cell.Value</span><br><span class="line">        </span><br><span class="line">        Set NewBook = Workbooks.Add</span><br><span class="line">        SourceSheet.UsedRange.SpecialCells(xlCellTypeVisible).Copy Destination:=NewBook.Sheets(1).Range(&quot;A1&quot;)</span><br><span class="line">        </span><br><span class="line">        &#x27; Save New File</span><br><span class="line">        NewBook.SaveAs Filename:=SavePath &amp; Cell.Value &amp; &quot;.xlsx&quot;</span><br><span class="line">        NewBook.Close SaveChanges:=False</span><br><span class="line">        </span><br><span class="line">    Next Cell</span><br><span class="line">    </span><br><span class="line">    &#x27; Cleanup</span><br><span class="line">    SourceSheet.AutoFilterMode = False</span><br><span class="line">    SourceSheet.Columns(&quot;XFD&quot;).Clear</span><br><span class="line">    Application.ScreenUpdating = True</span><br><span class="line">    Application.DisplayAlerts = True</span><br><span class="line">    </span><br><span class="line">    MsgBox &quot;Done! Files saved in: &quot; &amp; SavePath</span><br><span class="line">End Sub</span><br></pre></td></tr></table></figure>
+
+<h2 id="How-to-Use-It"><a href="#How-to-Use-It" class="headerlink" title="How to Use It"></a>How to Use It</h2><ol>
+<li>Open your Master Data sheet.</li>
+<li>Change <code>ColIndex = 1</code> in the code if you want to split by Column B (2) or C (3).</li>
+<li>Run the macro. Watch your folder fill up with separated files instantly!</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://syy321818.github.io/2025/12/09/Split-Sheet/" data-id="cuidLOSGVMELn4dJtnKda_N_9" data-title="How to Split Data into Multiple Excel Files (VBA Script)" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Automation/" rel="tag">Automation</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/VBA-Script/" rel="tag">VBA Script</a></li></ul>
+
     </footer>
   </div>
   
@@ -176,7 +392,7 @@ End Sub
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://syy321818.github.io/2025/12/09/Save-As-PDF/" data-id="cuidv9m3SGH7_z-b05OcYm9XB" data-title="VBA Script to Save Active Sheet as PDF" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://syy321818.github.io/2025/12/09/Save-As-PDF/" data-id="cuid_4u-rWcZbARe4nKiEhbFn" data-title="VBA Script to Save Active Sheet as PDF" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -247,7 +463,7 @@ End Sub
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://syy321818.github.io/2025/12/09/Merge-Files/" data-id="cuidcCKYRfgw7preGmwU1nrgK" data-title="How to Merge Multiple Excel Files into One (VBA Script)" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://syy321818.github.io/2025/12/09/Merge-Files/" data-id="cuidksf1YWVLDU6HqZDtsoQ9a" data-title="How to Merge Multiple Excel Files into One (VBA Script)" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -305,7 +521,7 @@ End Sub
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://syy321818.github.io/2025/12/09/Fix-Error-424/" data-id="cuid7NQ6nORZ68FMhOQa4Q4rT" data-title="How to Fix Runtime Error 424 (Object Required)" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://syy321818.github.io/2025/12/09/Fix-Error-424/" data-id="cuid8xVo_iC5S63MLHTcT3Yle" data-title="How to Fix Runtime Error 424 (Object Required)" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -355,7 +571,7 @@ End Sub
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://syy321818.github.io/2025/12/09/Fix-Error-13/" data-id="cuidnMmh66bc5GEiSaAUuO11X" data-title="How to Fix Runtime Error 13 (Type Mismatch)" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://syy321818.github.io/2025/12/09/Fix-Error-13/" data-id="cuidkW5Mr4eleN4ud89eEtLYA" data-title="How to Fix Runtime Error 13 (Type Mismatch)" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -410,7 +626,7 @@ End Sub
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://syy321818.github.io/2025/12/09/Fix-Error-9/" data-id="cuidJUxSWGL8mOX8_oWozTC_0" data-title="How to Fix Runtime Error 9 (Subscript out of range)" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://syy321818.github.io/2025/12/09/Fix-Error-9/" data-id="cuidHBXrHNAlxmGnrtbpwf2Ls" data-title="How to Fix Runtime Error 9 (Subscript out of range)" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -444,7 +660,7 @@ End Sub
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Automation/" rel="tag">Automation</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PDF/" rel="tag">PDF</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Runtime-Error-13/" rel="tag">Runtime Error 13</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Runtime-Error-424/" rel="tag">Runtime Error 424</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Runtime-Error-9/" rel="tag">Runtime Error 9</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VBA-Error/" rel="tag">VBA Error</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VBA-Script/" rel="tag">VBA Script</a></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Automation/" rel="tag">Automation</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Data-Cleaning/" rel="tag">Data Cleaning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Email/" rel="tag">Email</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PDF/" rel="tag">PDF</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Runtime-Error-13/" rel="tag">Runtime Error 13</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Runtime-Error-424/" rel="tag">Runtime Error 424</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Runtime-Error-9/" rel="tag">Runtime Error 9</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VBA-Error/" rel="tag">VBA Error</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VBA-Script/" rel="tag">VBA Script</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Word-Integration/" rel="tag">Word Integration</a></li></ul>
     </div>
   </div>
 
@@ -454,7 +670,7 @@ End Sub
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/Automation/" style="font-size: 15px;">Automation</a> <a href="/tags/PDF/" style="font-size: 10px;">PDF</a> <a href="/tags/Runtime-Error-13/" style="font-size: 10px;">Runtime Error 13</a> <a href="/tags/Runtime-Error-424/" style="font-size: 10px;">Runtime Error 424</a> <a href="/tags/Runtime-Error-9/" style="font-size: 10px;">Runtime Error 9</a> <a href="/tags/VBA-Error/" style="font-size: 20px;">VBA Error</a> <a href="/tags/VBA-Script/" style="font-size: 10px;">VBA Script</a>
+      <a href="/tags/Automation/" style="font-size: 20px;">Automation</a> <a href="/tags/Data-Cleaning/" style="font-size: 10px;">Data Cleaning</a> <a href="/tags/Email/" style="font-size: 10px;">Email</a> <a href="/tags/PDF/" style="font-size: 10px;">PDF</a> <a href="/tags/Runtime-Error-13/" style="font-size: 10px;">Runtime Error 13</a> <a href="/tags/Runtime-Error-424/" style="font-size: 10px;">Runtime Error 424</a> <a href="/tags/Runtime-Error-9/" style="font-size: 10px;">Runtime Error 9</a> <a href="/tags/VBA-Error/" style="font-size: 13.33px;">VBA Error</a> <a href="/tags/VBA-Script/" style="font-size: 16.67px;">VBA Script</a> <a href="/tags/Word-Integration/" style="font-size: 10px;">Word Integration</a>
     </div>
   </div>
 
@@ -480,19 +696,19 @@ End Sub
           </li>
         
           <li>
-            <a href="/2025/12/09/Save-As-PDF/">VBA Script to Save Active Sheet as PDF</a>
+            <a href="/2025/12/09/Excel-to-Word/">How to Automate Word from Excel using VBA (Contract Generator)</a>
           </li>
         
           <li>
-            <a href="/2025/12/09/Merge-Files/">How to Merge Multiple Excel Files into One (VBA Script)</a>
+            <a href="/2025/12/09/Send-Email/">VBA Code to Send Email from Excel (Outlook Automation)</a>
           </li>
         
           <li>
-            <a href="/2025/12/09/Fix-Error-424/">How to Fix Runtime Error 424 (Object Required)</a>
+            <a href="/2025/12/09/Delete-Blank-Rows/">How to Delete Blank Rows in Excel Instantly (Fast VBA Script)</a>
           </li>
         
           <li>
-            <a href="/2025/12/09/Fix-Error-13/">How to Fix Runtime Error 13 (Type Mismatch)</a>
+            <a href="/2025/12/09/Split-Sheet/">How to Split Data into Multiple Excel Files (VBA Script)</a>
           </li>
         
       </ul>
