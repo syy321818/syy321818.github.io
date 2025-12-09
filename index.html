@@ -78,127 +78,6 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-Fix-Error-424" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2025/12/09/Fix-Error-424/" class="article-date">
-  <time class="dt-published" datetime="2025-12-09T10:39:58.014Z" itemprop="datePublished">2025-12-09</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2025/12/09/Fix-Error-424/" data-id="cuid3xWWm1jCuT6Jv-sCH0F6z" data-title="" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-Fix-Error-91" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2025/12/09/Fix-Error-91/" class="article-date">
-  <time class="dt-published" datetime="2025-12-09T10:39:21.523Z" itemprop="datePublished">2025-12-09</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2025/12/09/Fix-Error-91/" data-id="cuidCTj-_IIjcfC4R8HxhXwiV" data-title="" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-Fix-Error-9" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2025/12/09/Fix-Error-9/" class="article-date">
-  <time class="dt-published" datetime="2025-12-09T10:23:37.619Z" itemprop="datePublished">2025-12-09</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>Markdown</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">title: How to Fix Runtime Error 9 (Subscript out of range)</span><br><span class="line">date: 2025-12-09 11:00:00</span><br><span class="line">tags: [VBA Error, Runtime Error 9]</span><br><span class="line">categories: Troubleshooting</span><br><span class="line">---</span><br><span class="line"></span><br><span class="line">## Introduction</span><br><span class="line"></span><br><span class="line">&quot;Runtime Error 9: Subscript out of range&quot; is a fundamental index error in VBA. It occurs when your code attempts to access a member of a collection or an element of an array that does not exist.</span><br><span class="line"></span><br><span class="line">Think of it as trying to pull a file from a specific drawer in a cabinet, but you are asking for &quot;Drawer 5&quot; when the cabinet only has 4 drawers. This error most commonly triggers when referencing Worksheets that don&#x27;t match the specific name provided, or when iterating through Arrays beyond their defined upper limits.</span><br><span class="line"></span><br><span class="line">## The Fix: Wrong vs. Right</span><br><span class="line"></span><br><span class="line">Here are the two most common scenarios where this error occurs and how to correct them.</span><br><span class="line"></span><br><span class="line">### Scenario 1: Referencing a Worksheet</span><br><span class="line">This error happens if the sheet name is misspelled, has extra spaces, or simply doesn&#x27;t exist in the active workbook.</span><br><span class="line"></span><br><span class="line">**❌ The Wrong Way**</span><br><span class="line">This code crashes if &quot;DataSheet&quot; does not exist.</span><br><span class="line"></span><br><span class="line">```vba</span><br><span class="line">Sub CauseError9_Sheet()</span><br><span class="line">    &#x27; If &quot;DataSheet&quot; is missing, Error 9 occurs immediately</span><br><span class="line">    Worksheets(&quot;DataSheet&quot;).Activate</span><br><span class="line">End Sub</span><br></pre></td></tr></table></figure>
-
-<p>✅ The Right Way</p>
-<p>Always verify the sheet exists before trying to assign or activate it.</p>
-<p>VBA</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">Sub FixError9_Sheet()</span><br><span class="line">    Dim ws As Worksheet</span><br><span class="line">    </span><br><span class="line">    On Error Resume Next</span><br><span class="line">    Set ws = Worksheets(&quot;DataSheet&quot;)</span><br><span class="line">    On Error GoTo 0</span><br><span class="line">    </span><br><span class="line">    If ws Is Nothing Then</span><br><span class="line">        MsgBox &quot;Error: The sheet &#x27;DataSheet&#x27; could not be found.&quot;, vbExclamation</span><br><span class="line">    Else</span><br><span class="line">        ws.Activate</span><br><span class="line">        &#x27; Continue with your code...</span><br><span class="line">    End If</span><br><span class="line">End Sub</span><br></pre></td></tr></table></figure>
-
-<h3 id="Scenario-2-Array-Boundaries"><a href="#Scenario-2-Array-Boundaries" class="headerlink" title="Scenario 2: Array Boundaries"></a>Scenario 2: Array Boundaries</h3><p>VBA arrays are often 0-based by default (unless <code>Option Base 1</code> is used). Error 9 occurs if you try to access an index outside the <code>LBound</code> (Lower Bound) or <code>UBound</code> (Upper Bound).</p>
-<p>❌ The Wrong Way</p>
-<p>Hardcoding the loop limit is risky.</p>
-<p>VBA</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Sub CauseError9_Array()</span><br><span class="line">    Dim MyArray(0 To 2) As String</span><br><span class="line">    &#x27; Array has indices 0, 1, 2.</span><br><span class="line">    &#x27; This loop tries to access index 3, triggering Error 9.</span><br><span class="line">    Dim i As Integer</span><br><span class="line">    For i = 0 To 3</span><br><span class="line">        Debug.Print MyArray(i)</span><br><span class="line">    Next i</span><br><span class="line">End Sub</span><br></pre></td></tr></table></figure>
-
-<p>✅ The Right Way</p>
-<p>Always use LBound and UBound to determine loop limits dynamically.</p>
-<p>VBA</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">Sub FixError9_Array()</span><br><span class="line">    Dim MyArray(0 To 2) As String</span><br><span class="line">    MyArray(0) = &quot;A&quot;</span><br><span class="line">    MyArray(1) = &quot;B&quot;</span><br><span class="line">    MyArray(2) = &quot;C&quot;</span><br><span class="line">    </span><br><span class="line">    Dim i As Integer</span><br><span class="line">    &#x27; Automatically stops at the correct upper limit (2)</span><br><span class="line">    For i = LBound(MyArray) To UBound(MyArray)</span><br><span class="line">        Debug.Print MyArray(i)</span><br><span class="line">    Next i</span><br><span class="line">End Sub</span><br></pre></td></tr></table></figure>
-
-<h2 id="Checklist-3-Things-to-Check"><a href="#Checklist-3-Things-to-Check" class="headerlink" title="Checklist: 3 Things to Check"></a>Checklist: 3 Things to Check</h2><p>If you are hitting this error, review these three areas immediately:</p>
-<ol>
-<li><strong>Sheet Name Spelling &amp; Spaces:</strong><ul>
-<li>Does the code ask for <code>&quot;Invoice&quot;</code> but the tab is named <code>&quot;Invoice &quot;</code> (with a trailing space)?</li>
-<li>Copy the name directly from the Excel tab into your code to be sure.</li>
-</ul>
-</li>
-<li><strong>Array Dimensioning:</strong><ul>
-<li>Did you <code>ReDim</code> the array before using it?</li>
-<li>Are you assuming the array starts at 1 when it actually starts at 0? (Check the <code>Locals Window</code> in the VBA Editor to see the actual bounds).</li>
-</ul>
-</li>
-<li><strong>Workbook Context:</strong><ul>
-<li>Are you trying to access <code>Workbooks(&quot;Source.xlsx&quot;).Sheets(&quot;Data&quot;)</code>?</li>
-<li>If <code>Source.xlsx</code> is not currently <strong>open</strong> in the same Excel instance, VBA cannot find the collection index, resulting in Error 9. Ensure the target workbook is open.</li>
-</ul>
-</li>
-</ol>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2025/12/09/Fix-Error-9/" data-id="cuidZtKyC40EdqW-VW56XsqN4" data-title="" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
     <article id="post-hello-world" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2025/12/09/hello-world/" class="article-date">
@@ -250,130 +129,6 @@
 
 
   
-    <article id="post-Fix-Error-13" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2025/12/09/Fix-Error-13/" class="article-date">
-  <time class="dt-published" datetime="2025-12-09T03:30:00.000Z" itemprop="datePublished">2025-12-09</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Troubleshooting/">Troubleshooting</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2025/12/09/Fix-Error-13/">How to Fix Runtime Error 13 (Type Mismatch) in Excel VBA</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>“Runtime Error 13: Type Mismatch” is VBA’s way of telling you that you are trying to force a square peg into a round hole. This error occurs when you attempt to assign a value to a variable or property that cannot accept that specific data type.</p>
-<p>The most common example is trying to perform a mathematical calculation on a variable that contains text (String) instead of a number, or trying to store a text string inside an Integer or Double variable.</p>
-<h2 id="Common-Causes"><a href="#Common-Causes" class="headerlink" title="Common Causes"></a>Common Causes</h2><ol>
-<li><strong>Math on Text:</strong> Attempting to multiply or divide a cell value that contains text (e.g., “TBA”) or is empty.</li>
-<li><strong>Excel Errors:</strong> Reading a cell value that contains an Excel formula error (like #N&#x2F;A or #DIV&#x2F;0!) into a typed variable.</li>
-<li><strong>Invalid Dates:</strong> Treating a text string that doesn’t look like a date as a Date object.</li>
-</ol>
-<h2 id="The-Solution"><a href="#The-Solution" class="headerlink" title="The Solution"></a>The Solution</h2><p>Here are two distinct scenarios where this error appears and the code patterns to resolve them.</p>
-<h3 id="Scenario-1-Math-on-Text-Cells"><a href="#Scenario-1-Math-on-Text-Cells" class="headerlink" title="Scenario 1: Math on Text Cells"></a>Scenario 1: Math on Text Cells</h3><p>If you loop through a column to multiply numbers, but one cell contains text (like a header or a note), the code will crash with Error 13.</p>
-<p><strong>❌ The Wrong Way</strong><br>This code assumes every cell in Column A is a valid number.</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Sub CauseError13_Math()</span><br><span class="line">    Dim total As Double</span><br><span class="line">    &#x27; If Range(&quot;A1&quot;) contains &quot;USD&quot; or &quot;Total&quot;, this line crashes</span><br><span class="line">    total = Range(&quot;A1&quot;).Value * 1.5</span><br><span class="line">End Sub</span><br></pre></td></tr></table></figure>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2025/12/09/Fix-Error-13/" data-id="cuidtZO9vBanVfXmqSHlPGR0L" data-title="How to Fix Runtime Error 13 (Type Mismatch) in Excel VBA" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Runtime-Error-13/" rel="tag">Runtime Error 13</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/VBA-Error/" rel="tag">VBA Error</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-How-to-Fix-Runtime-Error-1004" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2025/12/09/How-to-Fix-Runtime-Error-1004/" class="article-date">
-  <time class="dt-published" datetime="2025-12-09T02:00:00.000Z" itemprop="datePublished">2025-12-09</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Troubleshooting/">Troubleshooting</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2025/12/09/How-to-Fix-Runtime-Error-1004/">How to Fix Runtime Error 1004 in Excel VBA</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h1 id="Troubleshooting-“Runtime-Error-1004”-in-Excel-VBA"><a href="#Troubleshooting-“Runtime-Error-1004”-in-Excel-VBA" class="headerlink" title="Troubleshooting “Runtime Error 1004” in Excel VBA"></a>Troubleshooting “Runtime Error 1004” in Excel VBA</h1><h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>“Runtime Error 1004: Application-defined or object-defined error” is one of the most generic and frequent error messages in Excel VBA. It indicates that the code is attempting to perform an action on an object (such as a Range, Worksheet, or Workbook) that fails because the object is invalid, inaccessible, or the action is not permitted in the current context.</p>
-<h2 id="Common-Causes"><a href="#Common-Causes" class="headerlink" title="Common Causes"></a>Common Causes</h2><p>Because the error message is vague, the root cause usually lies in <em>how</em> you are referencing objects. The most common triggers include:</p>
-<ul>
-<li><strong>The Select&#x2F;Activate Trap:</strong> Attempting to <code>.Select</code> a Range on a Worksheet that is not currently the ActiveSheet.</li>
-<li><strong>Invalid References:</strong> Referencing a Worksheet name or Range address that does not exist (e.g., a typo in <code>&quot;Sheet1&quot;</code>).</li>
-<li><strong>Protection:</strong> Trying to modify a cell on a protected worksheet.</li>
-<li><strong>Data Issues:</strong> Pasting data that overlaps or exceeds the worksheet boundaries (e.g., too many rows).</li>
-</ul>
-<h2 id="The-Solution"><a href="#The-Solution" class="headerlink" title="The Solution"></a>The Solution</h2><p>Here are three common scenarios and the code patterns to fix them.</p>
-<h3 id="Fix-1-Stop-Using-Select-and-Activate"><a href="#Fix-1-Stop-Using-Select-and-Activate" class="headerlink" title="Fix 1: Stop Using .Select and .Activate"></a>Fix 1: Stop Using <code>.Select</code> and <code>.Activate</code></h3><p>This is the most common cause of Error 1004. If <code>Sheet1</code> is active, but your code tries to select a cell on <code>Sheet2</code>, the code will crash.</p>
-<p><strong>The Fix:</strong> Reference the objects directly without selecting them. This is faster and more stable.</p>
-<p>VBA</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#x27; ❌ BAD CODE: This triggers Error 1004 if &quot;DataSheet&quot; is not currently active</span><br><span class="line">Sheets(&quot;DataSheet&quot;).Range(&quot;A1&quot;).Select</span><br><span class="line">Selection.Value = 100</span><br><span class="line"></span><br><span class="line">&#x27; ✅ GOOD CODE: Direct referencing (No selection required)</span><br><span class="line">Worksheets(&quot;DataSheet&quot;).Range(&quot;A1&quot;).Value = 100</span><br></pre></td></tr></table></figure>
-
-<h3 id="Fix-2-Validating-Object-Existence"><a href="#Fix-2-Validating-Object-Existence" class="headerlink" title="Fix 2: Validating Object Existence"></a>Fix 2: Validating Object Existence</h3><p>If you try to set a variable to a worksheet that doesn’t exist (e.g., it was renamed or deleted), VBA throws Error 1004.</p>
-<p><strong>The Fix:</strong> Use basic error handling to check if the object exists before manipulating it.</p>
-<p>VBA</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">Sub SafeSheetReference()</span><br><span class="line">    Dim ws As Worksheet</span><br><span class="line">    </span><br><span class="line">    &#x27; Resume execution next line if an error occurs</span><br><span class="line">    On Error Resume Next</span><br><span class="line">    Set ws = Worksheets(&quot;Report_Final&quot;)</span><br><span class="line">    On Error GoTo 0 &#x27; Reset error handling</span><br><span class="line">    </span><br><span class="line">    &#x27; Check if the object was successfully set</span><br><span class="line">    If ws Is Nothing Then</span><br><span class="line">        MsgBox &quot;Error: The sheet &#x27;Report_Final&#x27; does not exist.&quot;</span><br><span class="line">        Exit Sub</span><br><span class="line">    End If</span><br><span class="line">    </span><br><span class="line">    &#x27; Safe to proceed</span><br><span class="line">    ws.Range(&quot;A1&quot;).Value = &quot;Generated&quot;</span><br><span class="line">End Sub</span><br></pre></td></tr></table></figure>
-
-<h3 id="Fix-3-Handling-Protected-Sheets"><a href="#Fix-3-Handling-Protected-Sheets" class="headerlink" title="Fix 3: Handling Protected Sheets"></a>Fix 3: Handling Protected Sheets</h3><p>Attempting to write data to a locked cell on a protected sheet will immediately trigger this error.</p>
-<p><strong>The Fix:</strong> Unprotect the sheet programmatically, perform the action, and re-protect it.</p>
-<p>VBA</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">Sub WriteToProtectedSheet()</span><br><span class="line">    Dim ws As Worksheet</span><br><span class="line">    Set ws = ThisWorkbook.Sheets(&quot;Summary&quot;)</span><br><span class="line">    </span><br><span class="line">    &#x27; 1. Unprotect (provide password if needed)</span><br><span class="line">    ws.Unprotect Password:=&quot;MySecretPass&quot;</span><br><span class="line">    </span><br><span class="line">    &#x27; 2. Perform the action</span><br><span class="line">    ws.Range(&quot;B5&quot;).Value = Date</span><br><span class="line">    </span><br><span class="line">    &#x27; 3. Re-protect the sheet</span><br><span class="line">    ws.Protect Password:=&quot;MySecretPass&quot;</span><br><span class="line">End Sub</span><br></pre></td></tr></table></figure>
-
-<h2 id="Prevention"><a href="#Prevention" class="headerlink" title="Prevention"></a>Prevention</h2><p><strong>Always fully qualify your ranges.</strong></p>
-<p>Never assume the active sheet is the one you want. Instead of writing generic code like <code>Range(&quot;A1&quot;).Value</code>, which defaults to the currently active sheet, always specify the parent object: <code>Worksheets(&quot;SheetName&quot;).Range(&quot;A1&quot;).Value</code>. This single habit prevents the majority of 1004 errors.</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2025/12/09/How-to-Fix-Runtime-Error-1004/" data-id="cuidGL70oVRfRL9BfHy9ClE_S" data-title="How to Fix Runtime Error 1004 in Excel VBA" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Error-Fix/" rel="tag">Error Fix</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Excel-VBA/" rel="tag">Excel VBA</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
 
 
 </section>
@@ -381,33 +136,12 @@
           <aside id="sidebar">
   
     
-  <div class="widget-wrap">
-    <h3 class="widget-title">Categories</h3>
-    <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Troubleshooting/">Troubleshooting</a></li></ul>
-    </div>
-  </div>
-
 
   
     
-  <div class="widget-wrap">
-    <h3 class="widget-title">Tags</h3>
-    <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Error-Fix/" rel="tag">Error Fix</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Excel-VBA/" rel="tag">Excel VBA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Runtime-Error-13/" rel="tag">Runtime Error 13</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VBA-Error/" rel="tag">VBA Error</a></li></ul>
-    </div>
-  </div>
-
 
   
     
-  <div class="widget-wrap">
-    <h3 class="widget-title">Tag Cloud</h3>
-    <div class="widget tagcloud">
-      <a href="/tags/Error-Fix/" style="font-size: 10px;">Error Fix</a> <a href="/tags/Excel-VBA/" style="font-size: 10px;">Excel VBA</a> <a href="/tags/Runtime-Error-13/" style="font-size: 10px;">Runtime Error 13</a> <a href="/tags/VBA-Error/" style="font-size: 10px;">VBA Error</a>
-    </div>
-  </div>
-
   
     
   <div class="widget-wrap">
@@ -426,23 +160,7 @@
       <ul>
         
           <li>
-            <a href="/2025/12/09/Fix-Error-424/">(no title)</a>
-          </li>
-        
-          <li>
-            <a href="/2025/12/09/Fix-Error-91/">(no title)</a>
-          </li>
-        
-          <li>
-            <a href="/2025/12/09/Fix-Error-9/">(no title)</a>
-          </li>
-        
-          <li>
             <a href="/2025/12/09/hello-world/">Hello World</a>
-          </li>
-        
-          <li>
-            <a href="/2025/12/09/Fix-Error-13/">How to Fix Runtime Error 13 (Type Mismatch) in Excel VBA</a>
           </li>
         
       </ul>
