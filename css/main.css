@@ -238,7 +238,7 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: Lato, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  font-family: Montserrat, Lato, 'PingFang SC', 'Microsoft YaHei', sans-serif;
   font-weight: bold;
   line-height: 1.5;
   margin: 30px 0 15px;
@@ -1432,7 +1432,7 @@ pre code {
     vertical-align: middle;
   }
   .links-of-author a::before {
-    background: #e7a35c;
+    background: #ffff8a;
     display: inline-block;
     margin-right: 3px;
     transform: translateY(-2px);
@@ -1907,6 +1907,16 @@ pre code {
 }
 .back-to-top.back-to-top-on {
   bottom: 30px;
+}
+.reading-progress-bar {
+  --progress: 0;
+  background: #37c6c0;
+  height: 3px;
+  position: fixed;
+  z-index: 50;
+  width: var(--progress);
+  left: 0;
+  top: 0;
 }
 .rtl.post-body p,
 .rtl.post-body a,
