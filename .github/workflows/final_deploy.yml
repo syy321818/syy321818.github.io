@@ -1,0 +1,52 @@
+name: Final Auto Deploy
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'source/**'
+      - '*.yml'
+      - '*.json'
+  workflow_dispatch: # 允许手动点按钮触发
+
+permissions:
+  contents: write    # 再次强调要写权限
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 1. 拉取代码
+        uses: actions/checkout@v3
+
+      - name: 2. 准备环境 (Node.js 18)
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: 3. 强制安装依赖和主题
+        run: |
+          npm install
+          npm install hexo-cli -g
+          npm install hexo-deployer-git --save
+          # 👇 关键：如果 themes/next 不存在，自动下载！
+          if [ ! -d "themes/next" ]; then
+            git clone https://github.com/next-theme/hexo-theme-next themes/next
+            echo "✅ 主题下载完成"
+          else
+            echo "✅ 主题已存在"
+          fi
+
+      - name: 4. 生成网页
+        run: |
+          npx hexo clean
+          npx hexo g
+
+      - name: 5. 发布到 gh-pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./public
+          publish_branch: gh-pages
+          force_orphan: true
