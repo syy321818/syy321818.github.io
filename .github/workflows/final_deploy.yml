@@ -1,16 +1,10 @@
-name: Fixed Auto Deploy
+name: Real Auto Deploy
 
 on:
   push:
-    branches:
-      - main
-    paths:
-      - 'source/**'
-      - '*.yml'
-      - 'package.json'
+    branches: [main]
   workflow_dispatch:
 
-# 👇 这一段必须写在最外面，确保拥有最高权限
 permissions:
   contents: write
   pages: write
@@ -23,27 +17,30 @@ jobs:
       - name: 1. 拉取代码
         uses: actions/checkout@v3
 
-      - name: 2. 准备环境
+      - name: 2. 准备 Node.js 18
         uses: actions/setup-node@v3
         with:
           node-version: '18'
 
-      - name: 3. 安装依赖和主题 (关键修复步骤)
+      - name: 3. 暴力修复环境 & 下载主题
         run: |
           npm install
           npm install hexo-cli -g
           npm install hexo-deployer-git --save
           
-          # 👇 自动下载主题！防止因为缺少 themes 文件夹而报错
-          mkdir -p themes
-          git clone https://github.com/next-theme/hexo-theme-next themes/next || echo "Theme already exists"
+          # 👇 核弹操作：不管有没有，先强制删除 themes 文件夹，再重新下载
+          # 这样绝对不会报错 "文件夹已存在"
+          rm -rf themes
+          mkdir themes
+          git clone https://github.com/next-theme/hexo-theme-next themes/next
+          echo "✅ 主题强制重装完成！"
 
       - name: 4. 生成网页
         run: |
           npx hexo clean
           npx hexo g
 
-      - name: 5. 强制发布
+      - name: 5. 强制发布到 gh-pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
