@@ -29,7 +29,7 @@
 <meta property="og:description" content="Introduction“Runtime Error 13: Type Mismatch” happens when you try to put the wrong type of data into a variable. For example, trying to multiply a text string like “Apple” by a number. The SolutionSc">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2025-12-09T03:30:00.000Z">
-<meta property="article:modified_time" content="2025-12-10T04:29:50.706Z">
+<meta property="article:modified_time" content="2025-12-10T04:32:07.077Z">
 <meta property="article:author" content="Admin">
 <meta property="article:tag" content="Runtime Error 13">
 <meta property="article:tag" content="VBA Error">
@@ -213,7 +213,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2025-12-10 12:29:50" itemprop="dateModified" datetime="2025-12-10T12:29:50+08:00">2025-12-10</time>
+      <time title="Modified: 2025-12-10 12:32:07" itemprop="dateModified" datetime="2025-12-10T12:32:07+08:00">2025-12-10</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -238,9 +238,9 @@
 <h2 id="The-Solution"><a href="#The-Solution" class="headerlink" title="The Solution"></a>The Solution</h2><h3 id="Scenario-Math-on-Text"><a href="#Scenario-Math-on-Text" class="headerlink" title="Scenario: Math on Text"></a>Scenario: Math on Text</h3><p><strong>❌ The Wrong Way</strong></p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#x27; Crashes if A1 contains text</span><br><span class="line">Range(&quot;B1&quot;).Value = Range(&quot;A1&quot;).Value * 2</span><br></pre></td></tr></table></figure>
 
-<p><strong>✅ The Right Way</strong></p>
+<p>✅ The Right Way</p>
 <p>VBA</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Sub FixTypeMismatch()</span><br><span class="line">    If IsNumeric(Range(&quot;A1&quot;).Value) Then</span><br><span class="line">        Range(&quot;B1&quot;).Value = Range(&quot;A1&quot;).Value * 2</span><br><span class="line">    Else</span><br><span class="line">        MsgBox &quot;Cell A1 is not a number!&quot;</span><br><span class="line">    End If</span><br><span class="line">End Sub</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Sub FixTypeMismatch()</span><br><span class="line">    &#x27; Always check if it is a number first</span><br><span class="line">    If IsNumeric(Range(&quot;A1&quot;).Value) Then</span><br><span class="line">        Range(&quot;B1&quot;).Value = Range(&quot;A1&quot;).Value * 2</span><br><span class="line">    Else</span><br><span class="line">        MsgBox &quot;Cell A1 is not a number!&quot;</span><br><span class="line">    End If</span><br><span class="line">End Sub</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
     </div>
 
     
