@@ -1,4 +1,4 @@
-name: Final Auto Deploy
+name: Fixed Auto Deploy
 
 on:
   push:
@@ -7,11 +7,14 @@ on:
     paths:
       - 'source/**'
       - '*.yml'
-      - '*.json'
-  workflow_dispatch: # 允许手动点按钮触发
+      - 'package.json'
+  workflow_dispatch:
 
+# 👇 这一段必须写在最外面，确保拥有最高权限
 permissions:
-  contents: write    # 再次强调要写权限
+  contents: write
+  pages: write
+  id-token: write
 
 jobs:
   build-and-deploy:
@@ -20,30 +23,27 @@ jobs:
       - name: 1. 拉取代码
         uses: actions/checkout@v3
 
-      - name: 2. 准备环境 (Node.js 18)
+      - name: 2. 准备环境
         uses: actions/setup-node@v3
         with:
           node-version: '18'
 
-      - name: 3. 强制安装依赖和主题
+      - name: 3. 安装依赖和主题 (关键修复步骤)
         run: |
           npm install
           npm install hexo-cli -g
           npm install hexo-deployer-git --save
-          # 👇 关键：如果 themes/next 不存在，自动下载！
-          if [ ! -d "themes/next" ]; then
-            git clone https://github.com/next-theme/hexo-theme-next themes/next
-            echo "✅ 主题下载完成"
-          else
-            echo "✅ 主题已存在"
-          fi
+          
+          # 👇 自动下载主题！防止因为缺少 themes 文件夹而报错
+          mkdir -p themes
+          git clone https://github.com/next-theme/hexo-theme-next themes/next || echo "Theme already exists"
 
       - name: 4. 生成网页
         run: |
           npx hexo clean
           npx hexo g
 
-      - name: 5. 发布到 gh-pages
+      - name: 5. 强制发布
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
