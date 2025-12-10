@@ -2,6 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://syy321818.github.io/2025/12/09/Fix-Error-13/</loc>
+    
+    <lastmod>2025-12-10</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://syy321818.github.io/categories/index.html</loc>
     
     <lastmod>2025-12-10</lastmod>
@@ -83,15 +92,6 @@
   </url>
   
   <url>
-    <loc>https://syy321818.github.io/2025/12/09/Fix-Error-13/</loc>
-    
-    <lastmod>2025-12-09</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://syy321818.github.io/2025/12/09/Fix-Error-9/</loc>
     
     <lastmod>2025-12-09</lastmod>
@@ -133,21 +133,14 @@
   </url>
   
   <url>
-    <loc>https://syy321818.github.io/tags/Word-Integration/</loc>
-    <lastmod>2025-12-10</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://syy321818.github.io/tags/PDF/</loc>
-    <lastmod>2025-12-10</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://syy321818.github.io/tags/Data-Cleaning/</loc>
+    <lastmod>2025-12-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://syy321818.github.io/tags/Word-Integration/</loc>
     <lastmod>2025-12-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -168,6 +161,13 @@
   </url>
   
   <url>
+    <loc>https://syy321818.github.io/tags/Email/</loc>
+    <lastmod>2025-12-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>https://syy321818.github.io/tags/Runtime-Error-424/</loc>
     <lastmod>2025-12-10</lastmod>
     <changefreq>weekly</changefreq>
@@ -182,7 +182,7 @@
   </url>
   
   <url>
-    <loc>https://syy321818.github.io/tags/Email/</loc>
+    <loc>https://syy321818.github.io/tags/PDF/</loc>
     <lastmod>2025-12-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
