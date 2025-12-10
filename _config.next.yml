@@ -1,0 +1,111 @@
+# ---------------------------------------------------------------
+# Theme Scheme (皮肤设置)
+# ---------------------------------------------------------------
+scheme: Gemini
+
+# ---------------------------------------------------------------
+# Sidebar Settings (侧边栏)
+# ---------------------------------------------------------------
+sidebar:
+  position: left
+  width: 300
+
+# ---------------------------------------------------------------
+# Menu (菜单栏 - 补回这一段，否则无法导航)
+# ---------------------------------------------------------------
+menu:
+  home: / || fa fa-home
+  categories: /categories/ || fa fa-th
+  tags: /tags/ || fa fa-tags
+  archives: /archives/ || fa fa-archive
+  about: /about/ || fa fa-user
+
+# ---------------------------------------------------------------
+# Avatar (头像)
+# ---------------------------------------------------------------
+avatar:
+  url: /images/avatar.jpg
+  rounded: true
+  rotated: true
+
+# ---------------------------------------------------------------
+# Footer (页脚)
+# ---------------------------------------------------------------
+footer:
+  since: 2025
+  icon:
+    name: fa fa-heart
+    animated: true
+    color: "#ff0000"
+
+# ---------------------------------------------------------------
+# Post Elements (文章元素)
+# ---------------------------------------------------------------
+tagcloud:
+  min_font: 12
+  max_font: 30
+  amount: 200
+  orderby: name
+  order: 1
+
+excerpt_description: true
+
+# ---------------------------------------------------------------
+# UI Effects (视觉特效)
+# ---------------------------------------------------------------
+codeblock:
+  copy_button:
+    enable: true
+    show_result: true
+    style: mac
+
+pace:
+  enable: true
+  theme: minimal
+
+motion:
+  enable: true
+  async: true
+  transition:
+    post_block: fadeIn
+    post_header: slideDownIn
+    post_body: slideDownIn
+
+darkmode: true
+
+reading_progress:
+  enable: true
+  color: "#37c6c0"
+  height: 3px
+
+font:
+  enable: true
+  host: fonts.googleapis.com
+  global:
+    external: true
+    family: Lato
+    size:
+  headings:
+    external: true
+    family: Montserrat
+    size:
+  code:
+    external: true
+    family: Fira Code
+    size:
+
+# ---------------------------------------------------------------
+# Analytics (数据统计)
+# ---------------------------------------------------------------
+busuanzi_count:
+  enable: true
+  total_visitors: true
+  total_visitors_icon: fa fa-user
+  total_views: true
+  total_views_icon: fa fa-eye
+  post_views: true
+  post_views_icon: fa fa-eye
+
+google_analytics:
+  tracking_id: G-JRY1J49LV2
+  only_pageview: false
